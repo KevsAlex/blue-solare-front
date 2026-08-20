@@ -1,4 +1,4 @@
-import { FiCheckCircle, FiArrowRight, FiSun, FiShield, FiFeather } from 'react-icons/fi'
+import { FiActivity, FiArrowRight, FiCheck, FiCheckCircle, FiClipboard, FiDroplet, FiEye, FiFeather, FiLayers, FiLock, FiPrinter, FiSearch, FiShield, FiSquare, FiSun } from 'react-icons/fi'
 
 const categories = [
   {
@@ -90,7 +90,7 @@ const categories = [
           { stat: '51%', label: 'Control solar', detail: 'Rechaza hasta el 51% de energía solar.' },
           { stat: '100%', label: 'Protección UV', detail: 'Bloqueo total de rayos ultravioleta.' },
           { stat: '68%', label: 'Transmisión VLT', detail: 'Espacios claros y confortables.' },
-          { stat: '🔵', label: 'Tono azul', detail: 'Acabado moderno en fachadas.' },
+          { stat: FiDroplet, label: 'Tono azul', detail: 'Acabado moderno en fachadas.' },
         ],
       },
     ],
@@ -111,9 +111,9 @@ const categories = [
         description:
           'Acabado opaco o esmerilado ideal para privacidad elegante. Perfecta para oficinas, baños y espacios donde la privacidad es esencial sin perder luz natural.',
         benefits: [
-          { stat: '🔒', label: 'Privacidad instantánea', detail: 'Sin cortinas ni persianas.' },
-          { stat: '✨', label: 'Acabado sofisticado', detail: 'Estética moderna y minimalista.' },
-          { stat: '☀️', label: 'Luz natural', detail: 'Privacidad sin oscurecer.' },
+          { stat: FiLock, label: 'Privacidad instantánea', detail: 'Sin cortinas ni persianas.' },
+          { stat: FiFeather, label: 'Acabado sofisticado', detail: 'Estética moderna y minimalista.' },
+          { stat: FiSun, label: 'Luz natural', detail: 'Privacidad sin oscurecer.' },
           { stat: '5-8', label: 'Años de vida útil', detail: 'Material duradero.' },
         ],
       },
@@ -125,10 +125,10 @@ const categories = [
         description:
           'Microperforaciones que permiten ver hacia el exterior desde adentro, mientras proyectan una imagen o diseño desde afuera. Ideal para publicidad en vidrios.',
         benefits: [
-          { stat: '👁️', label: 'Visibilidad interior', detail: 'Ver hacia fuera sin obstrucción.' },
-          { stat: '🖨️', label: 'Personalizable', detail: 'Logotipos, diseños o campañas.' },
-          { stat: '🔒', label: 'Privacidad de día', detail: 'Opaco desde el exterior.' },
-          { stat: '☀️', label: 'Control solar parcial', detail: 'Reduce deslumbramiento.' },
+          { stat: FiEye, label: 'Visibilidad interior', detail: 'Ver hacia fuera sin obstrucción.' },
+          { stat: FiPrinter, label: 'Personalizable', detail: 'Logotipos, diseños o campañas.' },
+          { stat: FiLock, label: 'Privacidad de día', detail: 'Opaco desde el exterior.' },
+          { stat: FiSun, label: 'Control solar parcial', detail: 'Reduce deslumbramiento.' },
         ],
       },
       {
@@ -139,9 +139,9 @@ const categories = [
         description:
           'Diseño de filtrado especial con tres tonos de color para una estética única y moderna. Cambia de color según el ángulo de la luz.',
         benefits: [
-          { stat: '🌈', label: 'Efecto multicolor', detail: 'Dinámico según ángulo de luz.' },
-          { stat: '☀️', label: 'Control solar', detail: 'Reducción del calor y UV.' },
-          { stat: '✓', label: 'Versátil', detail: 'Oficinas y hogares modernos.' },
+          { stat: FiLayers, label: 'Efecto multicolor', detail: 'Dinámico según ángulo de luz.' },
+          { stat: FiSun, label: 'Control solar', detail: 'Reducción del calor y UV.' },
+          { stat: FiCheck, label: 'Versátil', detail: 'Oficinas y hogares modernos.' },
           { stat: '5-8', label: 'Años de vida útil', detail: 'Material de alta calidad.' },
         ],
       },
@@ -164,8 +164,8 @@ const categories = [
           'Película reforzada de alta resistencia contra impactos, robos y accidentes. Refuerza el vidrio y previene la rotura en situaciones extremas.',
         benefits: [
           { stat: '4mil', label: 'Espesor', detail: 'Grosor óptimo para protección cotidiana.' },
-          { stat: '🔒', label: 'Anti-robo', detail: 'Dificulta rotura y acceso no autorizado.' },
-          { stat: '💪', label: 'Resistencia al impacto', detail: 'Retiene fragmentos ante rotura.' },
+          { stat: FiLock, label: 'Anti-robo', detail: 'Dificulta rotura y acceso no autorizado.' },
+          { stat: FiActivity, label: 'Resistencia al impacto', detail: 'Retiene fragmentos ante rotura.' },
           { stat: '10-12', label: 'Años de vida útil', detail: 'Larga durabilidad.' },
         ],
       },
@@ -179,8 +179,8 @@ const categories = [
         benefits: [
           { stat: '80%', label: 'Rechazo de calor', detail: 'Máximo control solar con acabado plata.' },
           { stat: '99%', label: 'Bloqueo UV', detail: 'Protección solar completa.' },
-          { stat: '🔒', label: 'Anti-robo', detail: 'Barrera reforzada ante accesos no autorizados.' },
-          { stat: '🪞', label: 'Efecto espejo', detail: 'Privacidad durante el día.' },
+          { stat: FiLock, label: 'Anti-robo', detail: 'Barrera reforzada ante accesos no autorizados.' },
+          { stat: FiSquare, label: 'Efecto espejo', detail: 'Privacidad durante el día.' },
         ],
       },
       {
@@ -193,8 +193,8 @@ const categories = [
         benefits: [
           { stat: '7mil', label: 'Mayor espesor', detail: 'Alta resistencia a impactos severos.' },
           { stat: '100%', label: 'Bloqueo UV', detail: 'Sin cambiar la visibilidad.' },
-          { stat: '📋', label: 'Cumple normativas', detail: 'Para negocios con certificación.' },
-          { stat: '🔍', label: 'Incolora', detail: 'No modifica la estética del cristal.' },
+          { stat: FiClipboard, label: 'Cumple normativas', detail: 'Para negocios con certificación.' },
+          { stat: FiSearch, label: 'Incolora', detail: 'No modifica la estética del cristal.' },
         ],
       },
     ],
@@ -233,7 +233,7 @@ function FilmRow({ film, c, reverse }) {
           />
         ) : (
           <div className={`w-full h-64 lg:h-80 ${c.section} flex items-center justify-center`}>
-            <span className="text-6xl opacity-30">🪟</span>
+            <FiSquare size={56} className="opacity-25" />
           </div>
         )}
       </div>
@@ -251,7 +251,7 @@ function FilmRow({ film, c, reverse }) {
             <div key={b.label} className="flex gap-2 items-start">
               <FiCheckCircle className={`${c.check} flex-shrink-0 mt-0.5`} size={14} />
               <div>
-                <p className={`text-sm font-bold ${c.stat}`}>{b.stat}</p>
+                <p className={`${c.stat}`}><b.stat size={18} /></p>
                 <p className="text-xs font-semibold text-ink-700 leading-tight">{b.label}</p>
                 <p className="text-xs text-ink-400 leading-tight mt-0.5">{b.detail}</p>
               </div>
@@ -316,7 +316,7 @@ export default function LineaArquitectonica() {
         const Icon = cat.icon
         const c = colorMap[cat.color]
         return (
-          <section key={cat.id} id={cat.id} className={`py-20 lg:py-28 ${c.section}`}>
+          <section key={cat.id} id={cat.id} className={`py-14 lg:py-14 ${c.section}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               {/* Category header */}
               <div className="flex items-center gap-4 mb-8">
@@ -355,7 +355,7 @@ export default function LineaArquitectonica() {
       })}
 
       {/* Bottom CTA */}
-      <section className="py-20 bg-white">
+      <section className="py-14 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-black text-ink-900">¿No sabes cuál elegir?</h2>
           <p className="mt-4 text-ink-500 text-lg leading-relaxed">

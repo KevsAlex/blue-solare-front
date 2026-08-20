@@ -1,4 +1,4 @@
-import { FiCheckCircle, FiArrowRight, FiTruck } from 'react-icons/fi'
+import { FiArrowRight, FiAward, FiCheck, FiCheckCircle, FiEye, FiLock, FiShield, FiSun, FiTruck, FiUsers, FiZap } from 'react-icons/fi'
 
 const films = [
   {
@@ -10,8 +10,8 @@ const films = [
       'Estética limpia y discreta sin reflejos molestos. Ideal para quienes buscan privacidad con un look sobrio y elegante. Compatible con señales GPS y celular.',
     benefits: [
       { stat: '↓', label: 'Sin reflejos', detail: 'Acabado neutral que no deslumbra.' },
-      { stat: '🔒', label: 'Privacidad', detail: 'Visibilidad reducida desde el exterior.' },
-      { stat: '☀️', label: 'Reducción de calor', detail: 'Mantén el habitáculo más fresco.' },
+      { stat: FiLock, label: 'Privacidad', detail: 'Visibilidad reducida desde el exterior.' },
+      { stat: FiSun, label: 'Reducción de calor', detail: 'Mantén el habitáculo más fresco.' },
       { stat: '99%', label: 'Bloqueo UV', detail: 'Protege piel e interiores del auto.' },
     ],
     color: 'slate',
@@ -25,8 +25,8 @@ const films = [
       'La mejor tecnología en control solar. Máximo rechazo de calor e infrarrojos sin interferir con señales GPS, Bluetooth ni celular. Claridad óptica superior.',
     benefits: [
       { stat: '84%', label: 'Rechazo infrarrojo', detail: 'Máximo control de calor sin oscurecer.' },
-      { stat: '✓', label: 'Sin interferencia GPS', detail: 'Compatible con todos los sistemas.' },
-      { stat: '👁️', label: 'Máxima claridad', detail: 'Visibilidad perfecta día y noche.' },
+      { stat: FiCheck, label: 'Sin interferencia GPS', detail: 'Compatible con todos los sistemas.' },
+      { stat: FiEye, label: 'Máxima claridad', detail: 'Visibilidad perfecta día y noche.' },
       { stat: '10+', label: 'Años de vida útil', detail: 'Material de larga duración.' },
     ],
     color: 'sky',
@@ -39,9 +39,9 @@ const films = [
     description:
       'Mantiene los fragmentos de vidrio unidos en caso de impacto o accidente. Disponible en versión transparente para parabrisas o con ligera tonalidad para los laterales.',
     benefits: [
-      { stat: '🛡️', label: 'Retención de fragmentos', detail: 'Evita lesiones ante impactos.' },
-      { stat: '🔒', label: 'Anti-robo', detail: 'Dificulta la rotura de ventanas.' },
-      { stat: '✓', label: 'Transparente', detail: 'No modifica la visibilidad del conductor.' },
+      { stat: FiShield, label: 'Retención de fragmentos', detail: 'Evita lesiones ante impactos.' },
+      { stat: FiLock, label: 'Anti-robo', detail: 'Dificulta la rotura de ventanas.' },
+      { stat: FiCheck, label: 'Transparente', detail: 'No modifica la visibilidad del conductor.' },
       { stat: '100%', label: 'Bloqueo UV', detail: 'Protección solar total.' },
     ],
     color: 'blue',
@@ -81,9 +81,9 @@ export default function LineaAutomotriz() {
       </section>
 
       {/* Films */}
-      <section className="py-20 lg:py-28 bg-ink-50">
+      <section className="py-14 lg:py-14 bg-ink-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
+          <div className="text-center mb-10">
             <h2 className="section-title">Nuestras películas automotrices</h2>
             <p className="section-subtitle mx-auto">
               Opciones para cada necesidad: desde polarizados clásicos hasta cerámica de última generación.
@@ -108,7 +108,7 @@ export default function LineaAutomotriz() {
                       <div key={b.label} className="flex gap-2 items-start">
                         <FiCheckCircle className={`${c.check} flex-shrink-0 mt-0.5`} size={14} />
                         <div>
-                          <p className={`text-sm font-bold ${c.stat}`}>{b.stat}</p>
+                          <p className={`${c.stat}`}><b.stat size={18} /></p>
                           <p className="text-xs font-semibold text-ink-700 leading-tight">{b.label}</p>
                           <p className="text-xs text-ink-400 leading-tight mt-0.5">{b.detail}</p>
                         </div>
@@ -129,20 +129,20 @@ export default function LineaAutomotriz() {
       </section>
 
       {/* Why choose us */}
-      <section className="py-20 bg-white">
+      <section className="py-14 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="section-title">¿Por qué elegir BluSolare?</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: '🏆', title: 'Materiales certificados', desc: 'Trabajamos con marcas líderes en la industria.' },
-              { icon: '👷', title: 'Instaladores certificados', desc: 'Técnicos con experiencia y precisión comprobada.' },
-              { icon: '⚡', title: 'Instalación rápida', desc: 'Terminamos en el mismo día en la mayoría de los casos.' },
-              { icon: '✅', title: 'Garantía incluida', desc: 'Respaldamos nuestro trabajo con garantía por escrito.' },
+              { icon: FiAward, title: 'Materiales certificados', desc: 'Trabajamos con marcas líderes en la industria.' },
+              { icon: FiUsers, title: 'Instaladores certificados', desc: 'Técnicos con experiencia y precisión comprobada.' },
+              { icon: FiZap, title: 'Instalación rápida', desc: 'Terminamos en el mismo día en la mayoría de los casos.' },
+              { icon: FiCheckCircle, title: 'Garantía incluida', desc: 'Respaldamos nuestro trabajo con garantía por escrito.' },
             ].map((item) => (
               <div key={item.title} className="text-center p-6 bg-brand-light rounded-2xl">
-                <span className="text-4xl block mb-3">{item.icon}</span>
+                <span className={`w-12 h-12 rounded-2xl bg-primary-50 text-primary-700 flex items-center justify-center mb-3`}><item.icon size={22} /></span>
                 <h3 className="font-bold text-ink-900 mb-2">{item.title}</h3>
                 <p className="text-ink-500 text-sm leading-relaxed">{item.desc}</p>
               </div>

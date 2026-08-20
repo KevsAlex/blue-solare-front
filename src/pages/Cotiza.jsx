@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FiPlus, FiTrash2, FiSend, FiArrowRight } from 'react-icons/fi'
+import { FiPlus, FiTrash2, FiSend, FiArrowRight, FiMaximize, FiCheck } from 'react-icons/fi'
 
 // ── Film catalogue ────────────────────────────────────────────────────────────
 const FILMS = {
@@ -207,7 +207,7 @@ function ItemRow({ item, onChange, onRemove, index, isOnly }) {
       {a && (
         <div className="mt-3 flex items-center gap-2 bg-blue-50 border border-blue-100 rounded-xl px-4 py-2">
           <span className="text-xs text-blue-600 font-medium">
-            📐 Área estimada: <strong>{a} m²</strong>
+            <FiMaximize size={13} className="inline -mt-0.5 mr-1" />Área estimada: <strong>{a} m²</strong>
             {item.cantidad > 1 && (
               <span className="text-blue-400 ml-1">
                 ({item.cantidad} × {parseFloat(item.ancho) * parseFloat(item.alto)} m²)
@@ -260,7 +260,7 @@ export default function Cotiza() {
       <div className="min-h-screen flex items-center justify-center bg-ink-50 px-4 pt-20">
         <div className="bg-white rounded-3xl shadow-xl p-12 max-w-md w-full text-center">
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5">
-            <span className="text-4xl">✅</span>
+            <FiCheck size={34} />
           </div>
           <h2 className="text-2xl font-black text-ink-900 mb-2">¡Solicitud enviada!</h2>
           <p className="text-ink-500 leading-relaxed mb-6">
@@ -281,7 +281,7 @@ export default function Cotiza() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-brand-dark via-primary-900 to-primary-800 pt-32 pb-16 text-center">
+      <section className="bg-gradient-to-br from-brand-dark via-primary-900 to-primary-800 pt-28 pb-12 text-center">
         <div className="max-w-2xl mx-auto px-4">
           <img
             src="/images/logo-white.png"

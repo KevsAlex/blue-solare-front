@@ -8,16 +8,16 @@ const films = [
     id: 'calor',
     Icon: FiThermometer,
     title: 'Reducción de Calor',
-    tagline: 'Hasta 80% de rechazo solar',
+    tagline: 'Hasta 95% de rechazo infrarrojo',
     image: '/images/bajar_calor.jpg',
     imageAlt: 'Sala con ventanas y película de control solar BluSolare',
     description:
       'Nuestras películas de control solar son la solución más eficiente para combatir el calor. Disponibles en versiones reflectivas y cerámicas para cada necesidad.',
     specs: [
-      { label: 'Rechazo de energía solar', value: 'Hasta 80%' },
-      { label: 'Bloqueo de rayos UV', value: '99%' },
-      { label: 'Rechazo infrarrojo', value: 'Hasta 84%' },
-      { label: 'Vida útil', value: '8–10 años' },
+      { label: 'Bloqueo de rayos UV', value: '100%' },
+      { label: 'Rechazo infrarrojo', value: 'Hasta 95%' },
+      { label: 'Tonos disponibles', value: 'Humo, verde, azul' },
+      { label: 'Garantía', value: '8–10 años' },
     ],
     color: 'orange',
   },
@@ -29,8 +29,8 @@ const films = [
     description:
       'Las películas de seguridad refuerzan el vidrio manteniéndolo unido ante impactos. Disponibles transparentes o con ligera tonalidad, son ideales para vitrinas, ventanas de alto tráfico o vehículos.',
     specs: [
-      { label: 'Espesor', value: '4–7 micras' },
-      { label: 'Vida útil', value: '10–12 años' },
+      { label: 'Espesor', value: '4–7 mil' },
+      { label: 'Garantía', value: '8–10 años' },
       { label: 'Función', value: 'Retención de fragmentos' },
       { label: 'Aspecto', value: 'Transparente o tintado ligero' },
     ],
@@ -47,7 +47,7 @@ const films = [
       { label: 'Esmerilado', value: 'Privacidad sin perder luz' },
       { label: 'Dicróico tricolor', value: 'Efecto multicolor dinámico' },
       { label: 'Microperforado', value: 'Diseños personalizables' },
-      { label: 'Vida útil', value: '5–8 años' },
+      { label: 'Garantía', value: '8–10 años' },
     ],
     color: 'purple',
   },
@@ -63,7 +63,7 @@ export default function FilmTypes() {
   const [openId, setOpenId] = useState(null)
 
   return (
-    <section id="peliculas" className="py-20 lg:py-28 bg-white">
+    <section id="peliculas" className="py-14 lg:py-14 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Tipos de película"

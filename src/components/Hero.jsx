@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom'
 import { FiArrowRight, FiMapPin, FiShield, FiSun, FiCheck } from 'react-icons/fi'
+import CountUp from './ui/CountUp'
 
+// Sourced from BluSolare's own spec sheet — see src/data/films.js.
+// UV 100% is measured across the catalogue; 95% IR is the UL60 maximum, so it is
+// labelled "hasta"; 8–10 years is the warranty printed on the quotation.
 const stats = [
-  { value: '80%', label: 'Rechazo de calor solar' },
-  { value: '99%', label: 'Bloqueo de rayos UV' },
-  { value: '10+', label: 'Años de durabilidad' },
+  { value: '100%', label: 'Bloqueo de rayos UV' },
+  { value: '95%',  label: 'Rechazo infrarrojo (máx.)' },
+  { value: '8–10', label: 'Años de garantía' },
 ]
 
 export default function Hero() {
@@ -33,7 +37,7 @@ export default function Hero() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid lg:grid-cols-[1.05fr_.95fr] gap-14 lg:gap-16 items-center">
           {/* Copy */}
-          <div className="animate-fade-up">
+          <div className="animate-fade-up [&>*]:animate-fade-up">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-4 py-1.5 mb-7">
               <FiMapPin className="text-accent-400" size={15} />
               <span className="text-white/90 text-sm font-medium">Querétaro, México</span>
@@ -78,8 +82,8 @@ export default function Hero() {
                 <div key={s.label}>
                   <dt className="sr-only">{s.label}</dt>
                   <dd>
-                    <span className="block text-3xl lg:text-4xl font-black text-white">{s.value}</span>
-                    <span className="block text-[11px] text-white/45 mt-1.5 leading-tight">{s.label}</span>
+                    <CountUp value={s.value} className="block text-3xl lg:text-4xl font-black text-white" />
+                    <span className="block text-[11px] text-white/45 mt-1.5 leading-tight text-balance">{s.label}</span>
                   </dd>
                 </div>
               ))}
@@ -103,8 +107,8 @@ export default function Hero() {
                 <FiSun size={17} />
               </div>
               <div>
-                <p className="text-[11px] text-ink-400 font-medium leading-none">Rechazo solar</p>
-                <p className="text-base font-extrabold text-ink-900 leading-tight">hasta 80%</p>
+                <p className="text-[11px] text-ink-400 font-medium leading-none">Rayos UV</p>
+                <p className="text-base font-extrabold text-ink-900 leading-tight">100% bloqueo</p>
               </div>
             </div>
 

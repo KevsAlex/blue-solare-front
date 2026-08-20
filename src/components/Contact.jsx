@@ -41,7 +41,7 @@ export default function Contact() {
   )
 
   return (
-    <section id="contacto" className="on-dark py-20 lg:py-28 bg-gradient-to-br from-ink-950 via-ink-900 to-primary-950">
+    <section id="contacto" className="on-dark py-14 lg:py-14 bg-gradient-to-br from-ink-950 via-ink-900 to-primary-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Left: info */}

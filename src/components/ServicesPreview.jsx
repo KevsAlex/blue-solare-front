@@ -22,7 +22,7 @@ const services = [
 
 export default function ServicesPreview() {
   return (
-    <section id="servicios" className="py-20 lg:py-28 bg-white">
+    <section id="servicios" className="py-14 lg:py-14 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Servicios"

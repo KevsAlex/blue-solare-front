@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FiChevronDown, FiChevronUp, FiArrowRight } from 'react-icons/fi'
+import { FiArrowRight, FiChevronDown, FiChevronUp, FiFeather, FiLock, FiShield, FiSun, FiZap } from 'react-icons/fi'
 
 const faqs = [
   {
@@ -41,12 +41,12 @@ const faqs = [
 ]
 
 const features = [
-  { icon: '☀️', title: 'Control Solar', desc: 'Filtra el calor y los rayos UV sin sacrificar la luz natural.' },
-  { icon: '🔒', title: 'Privacidad', desc: 'Opciones desde tono ligero hasta opaco para cada necesidad.' },
-  { icon: '🛡️', title: 'Seguridad', desc: 'Refuerza el vidrio y retiene fragmentos ante impactos.' },
-  { icon: '✨', title: 'Estética', desc: 'Acabados decorativos, esmerilados y dicróicos para diseño interior.' },
-  { icon: '🌿', title: 'Protección UV', desc: 'Hasta 99–100% de bloqueo de rayos ultravioleta.' },
-  { icon: '⚡', title: 'Eficiencia energética', desc: 'Reduce el consumo de aire acondicionado y la factura eléctrica.' },
+  { icon: FiSun, title: 'Control Solar', desc: 'Filtra el calor y los rayos UV sin sacrificar la luz natural.' },
+  { icon: FiLock, title: 'Privacidad', desc: 'Opciones desde tono ligero hasta opaco para cada necesidad.' },
+  { icon: FiShield, title: 'Seguridad', desc: 'Refuerza el vidrio y retiene fragmentos ante impactos.' },
+  { icon: FiFeather, title: 'Estética', desc: 'Acabados decorativos, esmerilados y dicróicos para diseño interior.' },
+  { icon: FiSun, title: 'Protección UV', desc: 'Hasta 99–100% de bloqueo de rayos ultravioleta.' },
+  { icon: FiZap, title: 'Eficiencia energética', desc: 'Reduce el consumo de aire acondicionado y la factura eléctrica.' },
 ]
 
 function FaqItem({ faq, index }) {
@@ -92,7 +92,7 @@ export default function QueEsUnaPelicula() {
       </section>
 
       {/* Intro section */}
-      <section className="py-20 bg-white">
+      <section className="py-14 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-14 items-center">
             {/* Visual */}
@@ -107,7 +107,7 @@ export default function QueEsUnaPelicula() {
               </div>
               {/* Floating tag */}
               <div className="absolute -bottom-4 -right-4 bg-white rounded-2xl px-4 py-2 shadow-lg flex items-center gap-2">
-                <span className="text-green-500 text-lg">✓</span>
+                <FiCheck className="text-green-500 shrink-0" size={17} />
                 <span className="text-sm font-semibold text-ink-700">No daña el vidrio</span>
               </div>
             </div>
@@ -134,7 +134,7 @@ export default function QueEsUnaPelicula() {
               <div className="grid grid-cols-2 gap-4 mt-8">
                 {features.map((f) => (
                   <div key={f.title} className="flex gap-3 items-start p-3 bg-brand-light rounded-xl">
-                    <span className="text-xl flex-shrink-0">{f.icon}</span>
+                    <span className="w-9 h-9 rounded-xl bg-primary-50 text-primary-700 flex items-center justify-center flex-shrink-0"><f.icon size={17} /></span>
                     <div>
                       <p className="font-semibold text-ink-900 text-sm">{f.title}</p>
                       <p className="text-ink-500 text-xs leading-tight mt-0.5">{f.desc}</p>
@@ -148,7 +148,7 @@ export default function QueEsUnaPelicula() {
       </section>
 
       {/* FAQ */}
-      <section className="py-20 bg-ink-50">
+      <section className="py-14 bg-ink-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="section-title">Preguntas frecuentes</h2>
@@ -165,7 +165,7 @@ export default function QueEsUnaPelicula() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-white">
+      <section className="py-14 bg-white">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-black text-ink-900">¿Listo para transformar tus espacios?</h2>
           <p className="mt-4 text-ink-500 text-lg">

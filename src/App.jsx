@@ -12,8 +12,12 @@ import Cotiza from './pages/Cotiza'
 /** React Router keeps scroll position across route changes; reset it so a new
  *  page always starts at the top. */
 function ScrollToTop() {
-  const { pathname } = useLocation()
-  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  const { pathname, hash } = useLocation()
+  useEffect(() => {
+    // Don't fight an #anchor deep link — only reset scroll for plain navigations.
+    if (hash) return
+    window.scrollTo(0, 0)
+  }, [pathname, hash])
   return null
 }
 
