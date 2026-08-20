@@ -1,7 +1,7 @@
 import Hero from '../components/Hero'
 import ServicesPreview from '../components/ServicesPreview'
+import QuickQuote from '../components/QuickQuote'
 import FilmTypes from '../components/FilmTypes'
-import TintSimulator from '../components/TintSimulator'
 import Process from '../components/Process'
 import Testimonials from '../components/Testimonials'
 import Contact from '../components/Contact'
@@ -11,8 +11,9 @@ export default function Home() {
     <>
       <Hero />
       <ServicesPreview />
+      {/* High in the page on purpose: this is the conversion step. */}
+      <QuickQuote />
       <FilmTypes />
-      <TintSimulator />
       <Process />
       <Testimonials />
       <Contact />

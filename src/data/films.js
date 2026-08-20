@@ -21,11 +21,14 @@ export const FILM_SPECS = [
 ]
 
 // Línea Arquitectónica price list, installation included (MXN/m², sin IVA).
+// `vlt` is only set where it is genuinely known: for the polarizadas the number
+// IN THE NAME *is* the visible-light transmission. Everything else is left
+// undefined rather than estimated — the UI hides bars it has no data for.
 export const ARQ_PRICES = [
-  { name: 'Polarizada 5%',                 price: 460,  note: 'Máximo Control Solar' },
-  { name: 'Polarizada 20%',                price: 460,  note: 'Balance Luz y Protección' },
-  { name: 'Polarizada 35%',                price: 460,  note: 'Alta Claridad con Protección' },
-  { name: 'Polarizada 50%',                price: 460,  note: 'Alta Claridad con Protección' },
+  { vlt: 5, name: 'Polarizada 5%',                 price: 460,  note: 'Máximo Control Solar' },
+  { vlt: 20, name: 'Polarizada 20%',                price: 460,  note: 'Balance Luz y Protección' },
+  { vlt: 35, name: 'Polarizada 35%',                price: 460,  note: 'Alta Claridad con Protección' },
+  { vlt: 50, name: 'Polarizada 50%',                price: 460,  note: 'Alta Claridad con Protección' },
   { name: 'Película Espejo Plata',         price: 460,  note: 'Control Solar Alto Rendimiento' },
   { name: 'Película Espejo Humo',          price: 760,  note: 'Privacidad y Control Solar' },
   { name: 'Espejo Plata Exterior',         price: 760,  note: 'Control Solar Alto Rendimiento en Exterior' },
@@ -39,6 +42,17 @@ export const ARQ_PRICES = [
 ]
 
 // Documented in the quotation template footer.
+// Línea Automotriz: $450/m² film, plus a flat installation fee by body style.
+export const AUTO_PRICE_M2 = 450
+export const AUTO_INSTALL = [
+  { type: 'Sedán',     install: 500 },
+  { type: 'Hatchback', install: 500 },
+  { type: 'Coupé',     install: 700 },
+  { type: 'PickUp',    install: 700 },
+  { type: 'SUV',       install: 800 },
+  { type: 'Minivan',   install: 800 },
+]
+
 export const WARRANTY_YEARS = '8–10'
 
 // Highest measured IR rejection in the catalogue (UL60). Stated as a maximum and

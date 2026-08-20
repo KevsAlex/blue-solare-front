@@ -1,30 +1,18 @@
-import { useState } from 'react'
-import { FiPlus, FiTrash2, FiSend, FiArrowRight, FiMaximize, FiCheck } from 'react-icons/fi'
+import { useRef, useState } from 'react'
+import { FiPlus, FiTrash2, FiSend, FiArrowRight, FiMaximize, FiCheck, FiAlertCircle } from 'react-icons/fi'
+import { ARQ_PRICES, AUTO_PRICE_M2, AUTO_INSTALL } from '../data/films'
+import BlockComparison from '../components/BlockComparison'
 
 // ── Film catalogue ────────────────────────────────────────────────────────────
+// Catalogue comes from the pricing workbook via films.js so names, prices and
+// specs can never drift apart. Automotive is priced per m2 plus a flat fee by
+// body style, so it is listed separately.
 const FILMS = {
-  arquitectonica: [
-    'Pelicula Polarizada 5%',
-    'Pelicula Polarizada 20%',
-    'Pelicula Polarizada 35%',
-    'Pelicula Polarizada 50%',
-    'Pelicula Reflectiva Plata',
-    'Pelicula Reflectiva Plata/Humo',
-    'Pelicula Seguridad Plata 4mil',
-    'Pelicula Seguridad Transp 4mil',
-    'Pelicula Seguridad Transp 7mil',
-    'Pelicula Nanoceramica',
-    'Película Esmerilada',
-    'Película Dicroica Tricolor',
-    'Película Microperforado',
-    'Pelicula Seguridad Polarizada 20%',
-  ],
-  automotriz: [
-    'Polarizado No Reflectivo',
-    'Película Cerámica',
-    'Película de Seguridad Automotriz',
-  ],
+  arquitectonica: ARQ_PRICES.map((f) => f.name),
+  automotriz: ['Polarizado No Reflectivo', 'Película Cerámica', 'Película de Seguridad Automotriz'],
 }
+
+const filmData = (name) => ARQ_PRICES.find((f) => f.name === name) || null
 
 const LINE_LABELS = {
   arquitectonica: 'Línea Arquitectónica',
@@ -59,13 +47,13 @@ const totalArea = (items) =>
 // ── WhatsApp message builder ──────────────────────────────────────────────────
 function buildMessage(client, items) {
   const lines = [
-    '🏷️ *Solicitud de Cotización — BluSolare*',
+    '*Solicitud de Cotizacion - BluSolare*',
     '',
-    `👤 *Nombre:* ${client.nombre}`,
-    `📞 *Teléfono:* ${client.telefono}`,
-    `📧 *Email:* ${client.email}`,
+    `*Nombre:* ${client.nombre}`,
+    `*Telefono:* ${client.telefono}`,
+    client.email ? `*Email:* ${client.email}` : null,
     '',
-    '*📋 Productos solicitados:*',
+    '*Productos solicitados:*',
     '',
   ]
 
@@ -84,13 +72,13 @@ function buildMessage(client, items) {
 
   const tot = totalArea(items)
   if (parseFloat(tot) > 0) {
-    lines.push(`📐 *Área total estimada:* ${tot} m²`)
+    lines.push(`*Area total estimada:* ${tot} m2`)
   }
 
   lines.push('')
   lines.push('Por favor, envíenme una cotización. ¡Gracias!')
 
-  return encodeURIComponent(lines.join('\n'))
+  return encodeURIComponent(lines.filter((l) => l !== null).join('\n'))
 }
 
 // ── Item row component ────────────────────────────────────────────────────────
@@ -203,7 +191,14 @@ function ItemRow({ item, onChange, onRemove, index, isOnly }) {
         </div>
       </div>
 
-      {/* Area preview */}
+      {/* What this film actually does — only metrics we have data for. */}
+      {item.linea === 'arquitectonica' && (
+        <div className="mt-3">
+          <BlockComparison film={filmData(item.pelicula)} />
+        </div>
+      )}
+
+      {/* Area + running estimate */}
       {a && (
         <div className="mt-3 flex items-center gap-2 bg-blue-50 border border-blue-100 rounded-xl px-4 py-2">
           <span className="text-xs text-blue-600 font-medium">
@@ -214,6 +209,11 @@ function ItemRow({ item, onChange, onRemove, index, isOnly }) {
               </span>
             )}
           </span>
+          {filmData(item.pelicula) && (
+            <span className="ml-auto text-xs font-bold text-primary-700 tabular-nums">
+              ≈ ${Math.round(parseFloat(a) * filmData(item.pelicula).price).toLocaleString('es-MX')}
+            </span>
+          )}
         </div>
       )}
     </div>
@@ -222,6 +222,8 @@ function ItemRow({ item, onChange, onRemove, index, isOnly }) {
 
 // ── Main page ─────────────────────────────────────────────────────────────────
 export default function Cotiza() {
+  const nombreRef = useRef(null)
+  const telefonoRef = useRef(null)
   const [client, setClient] = useState({ nombre: '', telefono: '', email: '' })
   const [items, setItems] = useState([emptyItem()])
   const [sent, setSent] = useState(false)
@@ -246,7 +248,17 @@ export default function Cotiza() {
   const handleSubmit = (e) => {
     e.preventDefault()
     const e2 = validate()
-    if (Object.keys(e2).length) { setErrors(e2); return }
+    if (Object.keys(e2).length) {
+      setErrors(e2)
+      // The contact fields sit far above the submit button, so simply marking
+      // them red does nothing for someone who is looking at the button — the
+      // form just appears dead. Bring the first missing field into view and
+      // focus it so the cause is unmistakable.
+      const el = e2.nombre ? nombreRef.current : telefonoRef.current
+      el?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      setTimeout(() => el?.focus({ preventScroll: true }), 320)
+      return
+    }
     setErrors({})
     const msg = buildMessage(client, items)
     window.open(`https://wa.me/524424488516?text=${msg}`, '_blank')
@@ -312,8 +324,10 @@ export default function Cotiza() {
                     Nombre *
                   </label>
                   <input
+                    ref={nombreRef}
                     type="text"
                     placeholder="Tu nombre"
+                    aria-invalid={!!errors.nombre}
                     value={client.nombre}
                     onChange={(e) => updateClient('nombre', e.target.value)}
                     className={`w-full border rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 ${errors.nombre ? 'border-red-400 bg-red-50' : 'border-ink-200'}`}
@@ -324,8 +338,10 @@ export default function Cotiza() {
                     Teléfono *
                   </label>
                   <input
+                    ref={telefonoRef}
                     type="tel"
                     placeholder="442 000 0000"
+                    aria-invalid={!!errors.telefono}
                     value={client.telefono}
                     onChange={(e) => updateClient('telefono', e.target.value)}
                     className={`w-full border rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 ${errors.telefono ? 'border-red-400 bg-red-50' : 'border-ink-200'}`}
