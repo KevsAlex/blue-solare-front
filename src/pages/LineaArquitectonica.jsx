@@ -1,3 +1,4 @@
+import Stat from '../components/ui/Stat'
 import { FiActivity, FiArrowRight, FiCheck, FiCheckCircle, FiClipboard, FiDroplet, FiEye, FiFeather, FiLayers, FiLock, FiPrinter, FiSearch, FiShield, FiSquare, FiSun } from 'react-icons/fi'
 
 const categories = [
@@ -18,8 +19,8 @@ const categories = [
           'Películas de alta tecnología diseñadas para reducir el calor excesivo y bloquear hasta el 99% de los rayos ultravioleta, sin sacrificar la luz natural.',
         benefits: [
           { stat: '80%', label: 'Reducción de calor', detail: 'Sin necesidad de aire acondicionado constante.' },
-          { stat: '99%', label: 'Bloqueo UV', detail: 'Protege muebles y superficies.' },
-          { stat: '84%', label: 'Rechazo IR', detail: 'Bloqueo de infrarrojos.' },
+          { stat: '100%', label: 'Bloqueo UV', detail: 'Protege muebles y superficies.' },
+          { stat: '95%', label: 'Rechazo IR', detail: 'Hasta 95% según la película.' },
           { stat: '8-10', label: 'Años de vida útil', detail: 'Material de alta durabilidad.' },
         ],
       },
@@ -60,7 +61,7 @@ const categories = [
           'Reduce el resplandor y mejora la visibilidad al filtrar una parte significativa de la luz solar. Balance perfecto entre protección y luminosidad.',
         benefits: [
           { stat: '56%', label: 'Rechazo solar (TSER)', detail: 'Control térmico eficiente.' },
-          { stat: '99%', label: 'Bloqueo UV', detail: 'Protección casi total contra rayos UV.' },
+          { stat: '100%', label: 'Bloqueo UV', detail: 'Protección total contra rayos UV.' },
           { stat: '77%', label: 'Bloqueo IR', detail: 'Reducción de infrarrojos.' },
           { stat: '22%', label: 'VLT reducido', detail: 'Hogares, oficinas y negocios.' },
         ],
@@ -178,7 +179,7 @@ const categories = [
           'Película de seguridad con acabado reflectivo plata. Combina control solar con protección contra impactos. Privacidad diurna + seguridad en una sola solución.',
         benefits: [
           { stat: '80%', label: 'Rechazo de calor', detail: 'Máximo control solar con acabado plata.' },
-          { stat: '99%', label: 'Bloqueo UV', detail: 'Protección solar completa.' },
+          { stat: '100%', label: 'Bloqueo UV', detail: 'Protección solar completa.' },
           { stat: FiLock, label: 'Anti-robo', detail: 'Barrera reforzada ante accesos no autorizados.' },
           { stat: FiSquare, label: 'Efecto espejo', detail: 'Privacidad durante el día.' },
         ],
@@ -251,7 +252,7 @@ function FilmRow({ film, c, reverse }) {
             <div key={b.label} className="flex gap-2 items-start">
               <FiCheckCircle className={`${c.check} flex-shrink-0 mt-0.5`} size={14} />
               <div>
-                <p className={`${c.stat}`}><b.stat size={18} /></p>
+                <p className={c.stat}><Stat value={b.stat} /></p>
                 <p className="text-xs font-semibold text-ink-700 leading-tight">{b.label}</p>
                 <p className="text-xs text-ink-400 leading-tight mt-0.5">{b.detail}</p>
               </div>

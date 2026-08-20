@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FiArrowRight, FiChevronDown, FiChevronUp, FiFeather, FiLock, FiShield, FiSun, FiZap } from 'react-icons/fi'
+import { FiArrowRight, FiCheck, FiChevronDown, FiChevronUp, FiFeather, FiLock, FiShield, FiSun, FiZap } from 'react-icons/fi'
 
 const faqs = [
   {

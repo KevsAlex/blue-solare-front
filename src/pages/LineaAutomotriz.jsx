@@ -1,3 +1,4 @@
+import Stat from '../components/ui/Stat'
 import { FiArrowRight, FiAward, FiCheck, FiCheckCircle, FiEye, FiLock, FiShield, FiSun, FiTruck, FiUsers, FiZap } from 'react-icons/fi'
 
 const films = [
@@ -12,7 +13,7 @@ const films = [
       { stat: '↓', label: 'Sin reflejos', detail: 'Acabado neutral que no deslumbra.' },
       { stat: FiLock, label: 'Privacidad', detail: 'Visibilidad reducida desde el exterior.' },
       { stat: FiSun, label: 'Reducción de calor', detail: 'Mantén el habitáculo más fresco.' },
-      { stat: '99%', label: 'Bloqueo UV', detail: 'Protege piel e interiores del auto.' },
+      { stat: '100%', label: 'Bloqueo UV', detail: 'Protege piel e interiores del auto.' },
     ],
     color: 'slate',
   },
@@ -24,10 +25,10 @@ const films = [
     description:
       'La mejor tecnología en control solar. Máximo rechazo de calor e infrarrojos sin interferir con señales GPS, Bluetooth ni celular. Claridad óptica superior.',
     benefits: [
-      { stat: '84%', label: 'Rechazo infrarrojo', detail: 'Máximo control de calor sin oscurecer.' },
+      { stat: '95%', label: 'Rechazo infrarrojo', detail: 'Máximo control de calor sin oscurecer.' },
       { stat: FiCheck, label: 'Sin interferencia GPS', detail: 'Compatible con todos los sistemas.' },
       { stat: FiEye, label: 'Máxima claridad', detail: 'Visibilidad perfecta día y noche.' },
-      { stat: '10+', label: 'Años de vida útil', detail: 'Material de larga duración.' },
+      { stat: '8–10', label: 'Años de garantía', detail: 'Material de larga duración.' },
     ],
     color: 'sky',
   },
@@ -108,7 +109,7 @@ export default function LineaAutomotriz() {
                       <div key={b.label} className="flex gap-2 items-start">
                         <FiCheckCircle className={`${c.check} flex-shrink-0 mt-0.5`} size={14} />
                         <div>
-                          <p className={`${c.stat}`}><b.stat size={18} /></p>
+                          <p className={c.stat}><Stat value={b.stat} /></p>
                           <p className="text-xs font-semibold text-ink-700 leading-tight">{b.label}</p>
                           <p className="text-xs text-ink-400 leading-tight mt-0.5">{b.detail}</p>
                         </div>
