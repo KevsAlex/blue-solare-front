@@ -105,9 +105,9 @@ function ItemRow({ item, onChange, onRemove, index, isOnly }) {
   const a = area(item)
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+    <div className="bg-white border border-ink-200 rounded-2xl p-5 shadow-sm">
       <div className="flex items-center justify-between mb-4">
-        <span className="text-sm font-bold text-gray-500 uppercase tracking-wider">
+        <span className="text-sm font-bold text-ink-500 uppercase tracking-wider">
           Ventana / Área #{index + 1}
         </span>
         {!isOnly && (
@@ -124,11 +124,11 @@ function ItemRow({ item, onChange, onRemove, index, isOnly }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Line */}
         <div>
-          <label className="block text-xs font-semibold text-gray-600 mb-1">Línea</label>
+          <label className="block text-xs font-semibold text-ink-600 mb-1">Línea</label>
           <select
             value={item.linea}
             onChange={(e) => handleLineChange(e.target.value)}
-            className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-brand-blue bg-white"
+            className="w-full border border-ink-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-brand-blue bg-white"
           >
             <option value="arquitectonica">Línea Arquitectónica</option>
             <option value="automotriz">Línea Automotriz</option>
@@ -137,11 +137,11 @@ function ItemRow({ item, onChange, onRemove, index, isOnly }) {
 
         {/* Film */}
         <div>
-          <label className="block text-xs font-semibold text-gray-600 mb-1">Película</label>
+          <label className="block text-xs font-semibold text-ink-600 mb-1">Película</label>
           <select
             value={item.pelicula}
             onChange={(e) => handleChange('pelicula', e.target.value)}
-            className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-brand-blue bg-white"
+            className="w-full border border-ink-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-brand-blue bg-white"
           >
             {FILMS[item.linea].map((f) => (
               <option key={f} value={f}>{f}</option>
@@ -151,19 +151,19 @@ function ItemRow({ item, onChange, onRemove, index, isOnly }) {
 
         {/* Quantity */}
         <div>
-          <label className="block text-xs font-semibold text-gray-600 mb-1">Cantidad (ventanas)</label>
+          <label className="block text-xs font-semibold text-ink-600 mb-1">Cantidad (ventanas)</label>
           <input
             type="number"
             min="1"
             value={item.cantidad}
             onChange={(e) => handleChange('cantidad', Math.max(1, parseInt(e.target.value) || 1))}
-            className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-brand-blue"
+            className="w-full border border-ink-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-brand-blue"
           />
         </div>
 
         {/* Measurements */}
         <div>
-          <label className="block text-xs font-semibold text-gray-600 mb-1">
+          <label className="block text-xs font-semibold text-ink-600 mb-1">
             Medidas (metros)
           </label>
           <div className="flex items-center gap-2">
@@ -174,9 +174,9 @@ function ItemRow({ item, onChange, onRemove, index, isOnly }) {
               placeholder="Ancho"
               value={item.ancho}
               onChange={(e) => handleChange('ancho', e.target.value)}
-              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-brand-blue"
+              className="w-full border border-ink-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-brand-blue"
             />
-            <span className="text-gray-400 font-bold flex-shrink-0">×</span>
+            <span className="text-ink-400 font-bold flex-shrink-0">×</span>
             <input
               type="number"
               min="0"
@@ -184,21 +184,21 @@ function ItemRow({ item, onChange, onRemove, index, isOnly }) {
               placeholder="Alto"
               value={item.alto}
               onChange={(e) => handleChange('alto', e.target.value)}
-              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-brand-blue"
+              className="w-full border border-ink-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-brand-blue"
             />
-            <span className="text-gray-400 text-xs flex-shrink-0">m</span>
+            <span className="text-ink-400 text-xs flex-shrink-0">m</span>
           </div>
         </div>
 
         {/* Notes */}
         <div className="sm:col-span-2">
-          <label className="block text-xs font-semibold text-gray-600 mb-1">Notas (opcional)</label>
+          <label className="block text-xs font-semibold text-ink-600 mb-1">Notas (opcional)</label>
           <input
             type="text"
             placeholder="Ubicación, color preferido, observaciones..."
             value={item.notas}
             onChange={(e) => handleChange('notas', e.target.value)}
-            className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-brand-blue"
+            className="w-full border border-ink-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-brand-blue"
           />
         </div>
       </div>
@@ -257,13 +257,13 @@ export default function Cotiza() {
 
   if (sent) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 pt-20">
+      <div className="min-h-screen flex items-center justify-center bg-ink-50 px-4 pt-20">
         <div className="bg-white rounded-3xl shadow-xl p-12 max-w-md w-full text-center">
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5">
             <span className="text-4xl">✅</span>
           </div>
-          <h2 className="text-2xl font-black text-gray-900 mb-2">¡Solicitud enviada!</h2>
-          <p className="text-gray-500 leading-relaxed mb-6">
+          <h2 className="text-2xl font-black text-ink-900 mb-2">¡Solicitud enviada!</h2>
+          <p className="text-ink-500 leading-relaxed mb-6">
             Tu cotización fue enviada a nuestro equipo vía WhatsApp. Te responderemos con los precios
             a la brevedad posible.
           </p>
@@ -287,6 +287,7 @@ export default function Cotiza() {
             src="/images/logo.png"
             alt="BluSolare"
             className="h-14 w-auto object-contain mx-auto mb-6 brightness-0 invert"
+            loading="lazy"
           />
           <h1 className="text-4xl sm:text-5xl font-black text-white leading-tight">
             Cotizador en línea
@@ -298,16 +299,16 @@ export default function Cotiza() {
         </div>
       </section>
 
-      <section className="py-12 bg-gray-50 min-h-screen">
+      <section className="py-12 bg-ink-50 min-h-screen">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <form onSubmit={handleSubmit} className="space-y-6">
 
             {/* Client info */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
-              <h2 className="text-base font-bold text-gray-900 mb-4">Tus datos de contacto</h2>
+            <div className="bg-white border border-ink-200 rounded-2xl p-6 shadow-sm">
+              <h2 className="text-base font-bold text-ink-900 mb-4">Tus datos de contacto</h2>
               <div className="grid sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-600 mb-1">
                     Nombre *
                   </label>
                   <input
@@ -315,11 +316,11 @@ export default function Cotiza() {
                     placeholder="Tu nombre"
                     value={client.nombre}
                     onChange={(e) => updateClient('nombre', e.target.value)}
-                    className={`w-full border rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 ${errors.nombre ? 'border-red-400 bg-red-50' : 'border-gray-200'}`}
+                    className={`w-full border rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 ${errors.nombre ? 'border-red-400 bg-red-50' : 'border-ink-200'}`}
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-600 mb-1">
                     Teléfono *
                   </label>
                   <input
@@ -327,11 +328,11 @@ export default function Cotiza() {
                     placeholder="442 000 0000"
                     value={client.telefono}
                     onChange={(e) => updateClient('telefono', e.target.value)}
-                    className={`w-full border rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 ${errors.telefono ? 'border-red-400 bg-red-50' : 'border-gray-200'}`}
+                    className={`w-full border rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 ${errors.telefono ? 'border-red-400 bg-red-50' : 'border-ink-200'}`}
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                  <label className="block text-xs font-semibold text-ink-600 mb-1">
                     Correo electrónico
                   </label>
                   <input
@@ -339,7 +340,7 @@ export default function Cotiza() {
                     placeholder="tu@correo.com"
                     value={client.email}
                     onChange={(e) => updateClient('email', e.target.value)}
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    className="w-full border border-ink-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
                   />
                 </div>
               </div>
@@ -348,10 +349,10 @@ export default function Cotiza() {
             {/* Items */}
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-base font-bold text-gray-900">
+                <h2 className="text-base font-bold text-ink-900">
                   Ventanas / Áreas a cubrir
                 </h2>
-                <span className="text-xs text-gray-400">{items.length} elemento(s)</span>
+                <span className="text-xs text-ink-400">{items.length} elemento(s)</span>
               </div>
 
               {items.map((item, idx) => (
@@ -408,8 +409,9 @@ export default function Cotiza() {
                 src="/images/logo.png"
                 alt="BluSolare"
                 className="h-7 w-auto object-contain opacity-40"
-              />
-              <p className="text-xs text-gray-400">
+            loading="lazy"
+          />
+              <p className="text-xs text-ink-400">
                 Se abrirá WhatsApp con tu solicitud lista para enviar. Sin compromiso.
               </p>
             </div>

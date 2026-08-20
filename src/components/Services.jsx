@@ -91,11 +91,11 @@ export default function Services() {
                   const c = colorMap[item.color]
                   return (
                     <div key={item.title} className={`card p-7 ${c.bg} border border-transparent hover:border-blue-100`}>
-                      <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                      <p className="text-gray-600 text-sm leading-relaxed mb-5">{item.description}</p>
+                      <h3 className="text-xl font-bold text-ink-900 mb-3">{item.title}</h3>
+                      <p className="text-ink-600 text-sm leading-relaxed mb-5">{item.description}</p>
                       <ul className="space-y-2">
                         {item.benefits.map((benefit) => (
-                          <li key={benefit} className="flex items-center gap-2 text-sm text-gray-700">
+                          <li key={benefit} className="flex items-center gap-2 text-sm text-ink-700">
                             <FiCheckCircle className={`${c.check} flex-shrink-0`} size={16} />
                             {benefit}
                           </li>

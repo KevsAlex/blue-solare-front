@@ -1,4 +1,6 @@
 import { FiStar } from 'react-icons/fi'
+import SectionHeading from './ui/SectionHeading'
+import Reveal from './ui/Reveal'
 
 const testimonials = [
   {
@@ -53,14 +55,13 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-20 lg:py-28 bg-gray-50">
+    <section className="py-20 lg:py-28 bg-ink-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
-          <h2 className="section-title">Lo que dicen nuestros clientes</h2>
-          <p className="section-subtitle mx-auto">
-            Más de cientos de instalaciones exitosas en Querétaro. La satisfacción de nuestros clientes es nuestra mayor recompensa.
-          </p>
-        </div>
+        <SectionHeading
+          eyebrow="Testimonios"
+          title="Lo que dicen nuestros clientes"
+          subtitle="Trabajos reales en Querétaro — residenciales, comerciales y automotrices."
+        />
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((t) => (
@@ -73,16 +74,16 @@ export default function Testimonials() {
               </div>
 
               {/* Quote */}
-              <p className="text-gray-600 text-sm leading-relaxed flex-1">"{t.text}"</p>
+              <p className="text-ink-600 text-sm leading-relaxed flex-1">"{t.text}"</p>
 
               {/* Author */}
-              <div className="flex items-center gap-3 mt-6 pt-5 border-t border-gray-100">
+              <div className="flex items-center gap-3 mt-6 pt-5 border-t border-ink-100">
                 <div className={`w-10 h-10 ${t.color} rounded-full flex items-center justify-center flex-shrink-0`}>
                   <span className="text-white text-sm font-bold">{t.initials}</span>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 text-sm">{t.name}</p>
-                  <p className="text-gray-400 text-xs">{t.role}</p>
+                  <p className="font-semibold text-ink-900 text-sm">{t.name}</p>
+                  <p className="text-ink-400 text-xs">{t.role}</p>
                 </div>
               </div>
             </div>

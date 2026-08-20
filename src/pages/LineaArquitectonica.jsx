@@ -221,7 +221,7 @@ const colorMap = {
 
 function FilmRow({ film, c, reverse }) {
   return (
-    <div className={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-12 items-center bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden border border-gray-100`}>
+    <div className={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-12 items-center bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden border border-ink-100`}>
       {/* Image */}
       <div className="w-full lg:w-1/2 flex-shrink-0 overflow-hidden">
         {film.image ? (
@@ -229,6 +229,7 @@ function FilmRow({ film, c, reverse }) {
             src={film.image}
             alt={film.title}
             className="w-full h-64 lg:h-80 object-cover hover:scale-105 transition-transform duration-500"
+            loading="lazy"
           />
         ) : (
           <div className={`w-full h-64 lg:h-80 ${c.section} flex items-center justify-center`}>
@@ -242,8 +243,8 @@ function FilmRow({ film, c, reverse }) {
         <span className={`inline-block text-xs font-bold px-3 py-1 rounded-full border mb-3 ${c.tag}`}>
           {film.subtitle}
         </span>
-        <h3 className="text-2xl font-black text-gray-900 mb-2">{film.title}</h3>
-        <p className="text-gray-500 text-sm leading-relaxed mb-6">{film.description}</p>
+        <h3 className="text-2xl font-black text-ink-900 mb-2">{film.title}</h3>
+        <p className="text-ink-500 text-sm leading-relaxed mb-6">{film.description}</p>
 
         <div className="grid grid-cols-2 gap-3">
           {film.benefits.map((b) => (
@@ -251,8 +252,8 @@ function FilmRow({ film, c, reverse }) {
               <FiCheckCircle className={`${c.check} flex-shrink-0 mt-0.5`} size={14} />
               <div>
                 <p className={`text-sm font-bold ${c.stat}`}>{b.stat}</p>
-                <p className="text-xs font-semibold text-gray-700 leading-tight">{b.label}</p>
-                <p className="text-xs text-gray-400 leading-tight mt-0.5">{b.detail}</p>
+                <p className="text-xs font-semibold text-ink-700 leading-tight">{b.label}</p>
+                <p className="text-xs text-ink-400 leading-tight mt-0.5">{b.detail}</p>
               </div>
             </div>
           ))}
@@ -289,7 +290,7 @@ export default function LineaArquitectonica() {
       </section>
 
       {/* Category nav pills */}
-      <div className="sticky top-16 lg:top-20 z-40 bg-white border-b border-gray-100 shadow-sm">
+      <div className="sticky top-16 lg:top-20 z-40 bg-white border-b border-ink-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex gap-1 overflow-x-auto py-3 scrollbar-hide">
             {categories.map((cat) => {
@@ -324,7 +325,7 @@ export default function LineaArquitectonica() {
                 </div>
                 <div>
                   <span className={`text-xs font-bold uppercase tracking-widest ${c.stat}`}>Categoría</span>
-                  <h2 className="text-2xl md:text-3xl font-black text-gray-900">
+                  <h2 className="text-2xl md:text-3xl font-black text-ink-900">
                     Películas {cat.label}
                   </h2>
                 </div>
@@ -337,7 +338,8 @@ export default function LineaArquitectonica() {
                     src={cat.image}
                     alt={cat.imageAlt}
                     className="w-full h-full object-cover"
-                  />
+            loading="lazy"
+          />
                 </div>
               )}
 
@@ -355,8 +357,8 @@ export default function LineaArquitectonica() {
       {/* Bottom CTA */}
       <section className="py-20 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-black text-gray-900">¿No sabes cuál elegir?</h2>
-          <p className="mt-4 text-gray-500 text-lg leading-relaxed">
+          <h2 className="text-3xl font-black text-ink-900">¿No sabes cuál elegir?</h2>
+          <p className="mt-4 text-ink-500 text-lg leading-relaxed">
             Nuestros expertos te asesoran sin costo. Contáctanos y te recomendamos la película ideal
             para tu espacio, presupuesto y necesidades.
           </p>

@@ -81,7 +81,7 @@ export default function LineaAutomotriz() {
       </section>
 
       {/* Films */}
-      <section className="py-20 lg:py-28 bg-gray-50">
+      <section className="py-20 lg:py-28 bg-ink-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <h2 className="section-title">Nuestras películas automotrices</h2>
@@ -100,17 +100,17 @@ export default function LineaAutomotriz() {
                       {film.tag}
                     </span>
                   )}
-                  <h3 className="text-xl font-bold text-gray-900 mb-1 pr-24">{film.title}</h3>
+                  <h3 className="text-xl font-bold text-ink-900 mb-1 pr-24">{film.title}</h3>
                   <p className={`text-xs font-semibold mb-4 ${c.stat}`}>{film.subtitle}</p>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-6">{film.description}</p>
+                  <p className="text-ink-600 text-sm leading-relaxed mb-6">{film.description}</p>
                   <div className="grid grid-cols-2 gap-3">
                     {film.benefits.map((b) => (
                       <div key={b.label} className="flex gap-2 items-start">
                         <FiCheckCircle className={`${c.check} flex-shrink-0 mt-0.5`} size={14} />
                         <div>
                           <p className={`text-sm font-bold ${c.stat}`}>{b.stat}</p>
-                          <p className="text-xs font-semibold text-gray-700 leading-tight">{b.label}</p>
-                          <p className="text-xs text-gray-400 leading-tight mt-0.5">{b.detail}</p>
+                          <p className="text-xs font-semibold text-ink-700 leading-tight">{b.label}</p>
+                          <p className="text-xs text-ink-400 leading-tight mt-0.5">{b.detail}</p>
                         </div>
                       </div>
                     ))}
@@ -143,8 +143,8 @@ export default function LineaAutomotriz() {
             ].map((item) => (
               <div key={item.title} className="text-center p-6 bg-brand-light rounded-2xl">
                 <span className="text-4xl block mb-3">{item.icon}</span>
-                <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                <h3 className="font-bold text-ink-900 mb-2">{item.title}</h3>
+                <p className="text-ink-500 text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>

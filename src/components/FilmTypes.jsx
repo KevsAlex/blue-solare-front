@@ -1,10 +1,12 @@
 import { useState } from 'react'
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
+import { FiChevronDown, FiChevronUp, FiThermometer, FiShield, FiFeather } from 'react-icons/fi'
+import SectionHeading from './ui/SectionHeading'
+import Reveal from './ui/Reveal'
 
 const films = [
   {
     id: 'calor',
-    emoji: '🌡️',
+    Icon: FiThermometer,
     title: 'Reducción de Calor',
     tagline: 'Hasta 80% de rechazo solar',
     image: '/images/bajar_calor.jpg',
@@ -21,7 +23,7 @@ const films = [
   },
   {
     id: 'seguridad',
-    emoji: '🛡️',
+    Icon: FiShield,
     title: 'Seguridad',
     tagline: 'Protección ante impactos',
     description:
@@ -36,7 +38,7 @@ const films = [
   },
   {
     id: 'decorativas',
-    emoji: '✨',
+    Icon: FiFeather,
     title: 'Decorativas',
     tagline: 'Estética y privacidad sin oscurecer',
     description:
@@ -61,39 +63,39 @@ export default function FilmTypes() {
   const [openId, setOpenId] = useState(null)
 
   return (
-    <section id="peliculas" className="py-20 lg:py-28 bg-gray-50">
+    <section id="peliculas" className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
-          <h2 className="section-title">¿Qué es una película de ventana?</h2>
-          <p className="section-subtitle mx-auto">
-            Una lámina delgada y funcional que se adhiere al vidrio para mejorar sus propiedades.
-            Conoce los tres tipos principales que ofrecemos.
-          </p>
-        </div>
+        <SectionHeading
+          eyebrow="Tipos de película"
+          title="¿Qué es una película de ventana?"
+          subtitle="Una lámina delgada y funcional que se adhiere al vidrio para mejorar sus propiedades. Estos son los tres tipos principales que ofrecemos."
+        />
 
         {/* Desktop: grid cards */}
         <div className="hidden md:grid md:grid-cols-3 gap-6">
           {films.map((film) => {
             const c = colorMap[film.color]
             return (
-              <div key={film.id} className={`card ${c.bg} border ${c.border} p-8`}>
-                <div className={`w-14 h-14 ${c.icon} rounded-2xl flex items-center justify-center text-3xl mb-5`}>
-                  {film.emoji}
+              <Reveal key={film.id} delay={films.indexOf(film) * 90} className="h-full">
+               <div className={`card card-hover ${c.bg} border ${c.border} p-8 h-full`}>
+                <div className={`w-14 h-14 ${c.icon} rounded-2xl flex items-center justify-center mb-5`}>
+                  <film.Icon size={24} className={c.val} />
                 </div>
                 <span className={`text-xs font-bold uppercase tracking-wider px-2 py-1 rounded-md ${c.tag}`}>
                   {film.tagline}
                 </span>
-                <h3 className="text-xl font-bold text-gray-900 mt-3 mb-3">{film.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed mb-6">{film.description}</p>
+                <h3 className="text-xl font-bold text-ink-900 mt-3 mb-3">{film.title}</h3>
+                <p className="text-ink-600 text-sm leading-relaxed mb-6">{film.description}</p>
                 <div className="space-y-3">
                   {film.specs.map((spec) => (
                     <div key={spec.label} className="flex justify-between items-center text-sm">
-                      <span className="text-gray-500">{spec.label}</span>
+                      <span className="text-ink-500">{spec.label}</span>
                       <span className={`font-semibold ${c.val}`}>{spec.value}</span>
                     </div>
                   ))}
                 </div>
-              </div>
+               </div>
+              </Reveal>
             )
           })}
         </div>
@@ -110,21 +112,23 @@ export default function FilmTypes() {
                   className="w-full flex items-center justify-between p-5 text-left"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-2xl">{film.emoji}</span>
+                    <span className={`w-10 h-10 rounded-xl ${c.icon} flex items-center justify-center`}>
+                      <film.Icon size={19} className={c.val} />
+                    </span>
                     <div>
-                      <p className="font-bold text-gray-900">{film.title}</p>
+                      <p className="font-bold text-ink-900">{film.title}</p>
                       <p className={`text-xs font-medium ${c.val}`}>{film.tagline}</p>
                     </div>
                   </div>
-                  {isOpen ? <FiChevronUp className="text-gray-500" /> : <FiChevronDown className="text-gray-500" />}
+                  {isOpen ? <FiChevronUp className="text-ink-500" /> : <FiChevronDown className="text-ink-500" />}
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-5 border-t border-gray-100">
-                    <p className="text-gray-600 text-sm leading-relaxed my-4">{film.description}</p>
+                  <div className="px-5 pb-5 border-t border-ink-100">
+                    <p className="text-ink-600 text-sm leading-relaxed my-4">{film.description}</p>
                     <div className="space-y-2">
                       {film.specs.map((spec) => (
                         <div key={spec.label} className="flex justify-between text-sm">
-                          <span className="text-gray-500">{spec.label}</span>
+                          <span className="text-ink-500">{spec.label}</span>
                           <span className={`font-semibold ${c.val}`}>{spec.value}</span>
                         </div>
                       ))}

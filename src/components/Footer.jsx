@@ -28,7 +28,7 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-brand-dark text-white">
+    <footer className="on-dark bg-ink-950 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid md:grid-cols-3 gap-10">
           {/* Brand */}
@@ -38,7 +38,8 @@ export default function Footer() {
                 src="/images/logo.png"
                 alt="BluSolare logo"
                 className="h-10 w-auto object-contain brightness-0 invert"
-              />
+            loading="lazy"
+          />
             </Link>
             <p className="text-white/50 text-sm leading-relaxed max-w-xs">
               Innovación y protección para tus cristales. Películas de alto rendimiento para hogares,

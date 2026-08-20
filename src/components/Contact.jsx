@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FiMail, FiPhone, FiMessageCircle, FiSend, FiMapPin } from 'react-icons/fi'
+import { FiMail, FiPhone, FiMessageCircle, FiSend, FiMapPin, FiCheck } from 'react-icons/fi'
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -17,7 +17,22 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Here you'd integrate with a real backend / email service
+
+    // There is no backend yet, so the form MUST NOT just pretend to send —
+    // it previously set sent=true and dropped the data on the floor. Until the
+    // planned API exists, hand the message off to WhatsApp, which is the channel
+    // the rest of the site already uses.
+    const lines = [
+      'Hola! Quiero cotizar una pelicula para mis ventanas.',
+      '',
+      `Nombre: ${form.name}`,
+      form.phone ? `Telefono: ${form.phone}` : null,
+      form.email ? `Correo: ${form.email}` : null,
+      form.service ? `Servicio: ${form.service}` : null,
+      form.message ? `Mensaje: ${form.message}` : null,
+    ].filter(Boolean)
+
+    window.open(`https://wa.me/524424488516?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener')
     setSent(true)
   }
 
@@ -26,7 +41,7 @@ export default function Contact() {
   )
 
   return (
-    <section id="contacto" className="py-20 lg:py-28 bg-gradient-to-br from-brand-dark to-primary-900">
+    <section id="contacto" className="on-dark py-20 lg:py-28 bg-gradient-to-br from-ink-950 via-ink-900 to-primary-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Left: info */}
@@ -35,7 +50,8 @@ export default function Contact() {
               src="/images/logo.png"
               alt="BluSolare"
               className="h-10 w-auto object-contain mb-5 brightness-0 invert opacity-80"
-            />
+            loading="lazy"
+          />
             <h2 className="text-3xl md:text-4xl font-black text-white leading-tight">
               Cotiza tu proyecto{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-300">
@@ -114,21 +130,36 @@ export default function Contact() {
           <div className="bg-white rounded-3xl p-8 shadow-2xl">
             {sent ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-12">
-                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-5">
-                  <span className="text-4xl">✓</span>
+                <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-5">
+                  <FiCheck size={34} />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">¡Mensaje enviado!</h3>
-                <p className="text-gray-500">
-                  Gracias por contactarnos. Te responderemos a la brevedad posible.
+                <h3 className="text-2xl font-bold text-ink-900 mb-2">Abrimos WhatsApp con tu mensaje</h3>
+                <p className="text-ink-500 max-w-sm">
+                  Sólo dale enviar y te respondemos a la brevedad. ¿No se abrió?
                 </p>
+                {/* Popup blockers are common on mobile — always leave a manual way out. */}
+                <a
+                  href={`https://wa.me/524424488516?text=${whatsappMsg}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary mt-5"
+                >
+                  <FiMessageCircle size={16} /> Abrir WhatsApp
+                </a>
+                <button
+                  onClick={() => setSent(false)}
+                  className="mt-3 text-sm text-ink-400 hover:text-primary-700 underline underline-offset-4"
+                >
+                  Volver al formulario
+                </button>
               </div>
             ) : (
               <>
-                <h3 className="text-xl font-bold text-gray-900 mb-6">Solicita tu cotización</h3>
+                <h3 className="text-xl font-bold text-ink-900 mb-6">Solicita tu cotización</h3>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Nombre *</label>
+                      <label className="block text-sm font-medium text-ink-700 mb-1">Nombre *</label>
                       <input
                         type="text"
                         name="name"
@@ -136,23 +167,23 @@ export default function Contact() {
                         value={form.name}
                         onChange={handleChange}
                         placeholder="Tu nombre"
-                        className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-colors"
+                        className="w-full border border-ink-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
+                      <label className="block text-sm font-medium text-ink-700 mb-1">Teléfono</label>
                       <input
                         type="tel"
                         name="phone"
                         value={form.phone}
                         onChange={handleChange}
                         placeholder="442 000 0000"
-                        className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-colors"
+                        className="w-full border border-ink-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-colors"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Correo electrónico *</label>
+                    <label className="block text-sm font-medium text-ink-700 mb-1">Correo electrónico *</label>
                     <input
                       type="email"
                       name="email"
@@ -160,16 +191,16 @@ export default function Contact() {
                       value={form.email}
                       onChange={handleChange}
                       placeholder="tu@correo.com"
-                      className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-colors"
+                      className="w-full border border-ink-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-colors"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Tipo de servicio</label>
+                    <label className="block text-sm font-medium text-ink-700 mb-1">Tipo de servicio</label>
                     <select
                       name="service"
                       value={form.service}
                       onChange={handleChange}
-                      className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-colors bg-white"
+                      className="w-full border border-ink-200 rounded-xl px-4 py-3 text-sm text-ink-600 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-colors bg-white"
                     >
                       <option value="">Selecciona un servicio</option>
                       <option value="residencial">Residencial / Hogar</option>
@@ -179,21 +210,21 @@ export default function Contact() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
+                    <label className="block text-sm font-medium text-ink-700 mb-1">Mensaje</label>
                     <textarea
                       name="message"
                       value={form.message}
                       onChange={handleChange}
                       rows={4}
                       placeholder="Cuéntanos sobre tu proyecto, dimensiones aproximadas, tipo de película que te interesa..."
-                      className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-colors resize-none"
+                      className="w-full border border-ink-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-colors resize-none"
                     />
                   </div>
                   <button type="submit" className="btn-primary w-full justify-center py-4">
                     <FiSend size={18} />
                     Enviar cotización
                   </button>
-                  <p className="text-xs text-gray-400 text-center">
+                  <p className="text-xs text-ink-400 text-center">
                     Al enviar aceptas nuestra política de privacidad. No hacemos spam.
                   </p>
                 </form>

@@ -1,4 +1,7 @@
+import { Link } from 'react-router-dom'
 import { FiHome, FiTruck, FiArrowRight } from 'react-icons/fi'
+import SectionHeading from './ui/SectionHeading'
+import Reveal from './ui/Reveal'
 
 const services = [
   {
@@ -6,7 +9,7 @@ const services = [
     title: 'Línea Arquitectónica',
     description: 'Películas para ventanas de hogares, oficinas y negocios. Control solar, privacidad, seguridad y diseño decorativo.',
     href: '/linea-arquitectonica',
-    color: 'blue',
+    image: '/images/bajar_calor.jpg',
     items: ['Control Solar', 'Reflectivas', 'Polarizadas', 'Nanocerámica', 'Esmeriladas', 'Seguridad'],
   },
   {
@@ -14,52 +17,62 @@ const services = [
     title: 'Línea Automotriz',
     description: 'Polarizados y películas de alta tecnología para todo tipo de vehículos. Más frescura, privacidad y protección.',
     href: '/linea-automotriz',
-    color: 'indigo',
+    image: '/images/polarizada_20.jpg',
     items: ['No Reflectivo', 'Cerámica', 'Seguridad', 'Alto Desempeño'],
   },
 ]
-
-const colorMap = {
-  blue:   { bg: 'bg-blue-50',   icon: 'bg-blue-100 text-blue-600', btn: 'text-blue-600 hover:text-blue-700', tag: 'bg-blue-100 text-blue-700' },
-  indigo: { bg: 'bg-indigo-50', icon: 'bg-indigo-100 text-indigo-600', btn: 'text-indigo-600 hover:text-indigo-700', tag: 'bg-indigo-100 text-indigo-700' },
-}
 
 export default function ServicesPreview() {
   return (
     <section id="servicios" className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
-          <h2 className="section-title">Nuestros Servicios</h2>
-          <p className="section-subtitle mx-auto">
-            Soluciones profesionales para cada espacio y necesidad.
-          </p>
-        </div>
+        <SectionHeading
+          eyebrow="Servicios"
+          title="Dos líneas, una misma exigencia"
+          subtitle="Soluciones profesionales para cada espacio y necesidad."
+        />
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {services.map((service) => {
+        <div className="grid md:grid-cols-2 gap-7">
+          {services.map((service, i) => {
             const Icon = service.icon
-            const c = colorMap[service.color]
             return (
-              <div key={service.title} className={`card ${c.bg} p-8`}>
-                <div className={`w-12 h-12 ${c.icon} rounded-2xl flex items-center justify-center mb-5`}>
-                  <Icon size={22} />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-600 leading-relaxed mb-6">{service.description}</p>
-                <div className="flex flex-wrap gap-2 mb-7">
-                  {service.items.map((item) => (
-                    <span key={item} className={`text-xs font-semibold px-2.5 py-1 rounded-full ${c.tag}`}>
-                      {item}
-                    </span>
-                  ))}
-                </div>
-                <a
-                  href={service.href}
-                  className={`inline-flex items-center gap-2 font-semibold text-sm ${c.btn} transition-colors`}
+              <Reveal key={service.title} delay={i * 90}>
+                <Link
+                  to={service.href}
+                  className="card card-hover group block h-full focus-visible:ring-2"
                 >
-                  Ver todos los productos <FiArrowRight size={16} />
-                </a>
-              </div>
+                  <div className="relative h-52 overflow-hidden">
+                    <img
+                      src={service.image}
+                      alt=""
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-ink-950/25 to-transparent" />
+                    <div className="absolute bottom-4 left-5 flex items-center gap-3">
+                      <div className="w-11 h-11 rounded-xl bg-white/15 backdrop-blur-md border border-white/25 text-white flex items-center justify-center">
+                        <Icon size={20} />
+                      </div>
+                      <h3 className="text-xl font-bold text-white">{service.title}</h3>
+                    </div>
+                  </div>
+
+                  <div className="p-7">
+                    <p className="text-ink-500 leading-relaxed mb-5">{service.description}</p>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {service.items.map((item) => (
+                        <span key={item} className="text-xs font-semibold px-2.5 py-1 rounded-full bg-primary-50 text-primary-700 border border-primary-100">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                    <span className="inline-flex items-center gap-2 font-semibold text-sm text-primary-700">
+                      Ver todos los productos
+                      <FiArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+                    </span>
+                  </div>
+                </Link>
+              </Reveal>
             )
           })}
         </div>
