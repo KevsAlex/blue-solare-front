@@ -284,9 +284,9 @@ export default function Cotiza() {
       <section className="bg-gradient-to-br from-brand-dark via-primary-900 to-primary-800 pt-32 pb-16 text-center">
         <div className="max-w-2xl mx-auto px-4">
           <img
-            src="/images/logo.png"
+            src="/images/logo-white.png"
             alt="BluSolare"
-            className="h-14 w-auto object-contain mx-auto mb-6 brightness-0 invert"
+            className="h-14 w-auto object-contain mx-auto mb-6"
             loading="lazy"
           />
           <h1 className="text-4xl sm:text-5xl font-black text-white leading-tight">
@@ -406,11 +406,11 @@ export default function Cotiza() {
 
             <div className="flex flex-col items-center gap-2 pt-2">
               <img
-                src="/images/logo.png"
+                src="/images/logo-dark.png"
                 alt="BluSolare"
                 className="h-7 w-auto object-contain opacity-40"
-            loading="lazy"
-          />
+                loading="lazy"
+              />
               <p className="text-xs text-ink-400">
                 Se abrirá WhatsApp con tu solicitud lista para enviar. Sin compromiso.
               </p>

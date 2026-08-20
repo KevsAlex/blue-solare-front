@@ -21,6 +21,9 @@ const LEVELS = [
   { vlt: 50, label: 'Polarizada 50%', opacity: 0.26, heat: '~45%', privacy: 'Ligera',  note: 'Casi imperceptible desde fuera.' },
 ]
 
+// NOTE: window-clean.jpg is a text-free crop of bajar_calor.jpg. Every stock
+// image in public/images/ is a marketing graphic with baked-in headlines and a
+// logo; none of them read as a plain window, which is what a tint preview needs.
 export default function TintSimulator() {
   const [idx, setIdx] = useState(1)
   const level = LEVELS[idx]
@@ -39,9 +42,9 @@ export default function TintSimulator() {
             {/* Preview */}
             <div className="relative rounded-3xl overflow-hidden shadow-lift border border-ink-100">
               <img
-                src="/images/pelicula_ventana.jpg"
+                src="/images/window-clean.jpg"
                 alt={`Simulación de una ventana con película ${level.label}`}
-                className="w-full h-[320px] sm:h-[380px] object-cover"
+                className="w-full h-[320px] sm:h-[420px] object-cover object-center"
                 loading="lazy"
               />
               {/* The tint itself */}

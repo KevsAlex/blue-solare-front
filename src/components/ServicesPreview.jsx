@@ -9,7 +9,6 @@ const services = [
     title: 'Línea Arquitectónica',
     description: 'Películas para ventanas de hogares, oficinas y negocios. Control solar, privacidad, seguridad y diseño decorativo.',
     href: '/linea-arquitectonica',
-    image: '/images/bajar_calor.jpg',
     items: ['Control Solar', 'Reflectivas', 'Polarizadas', 'Nanocerámica', 'Esmeriladas', 'Seguridad'],
   },
   {
@@ -17,7 +16,6 @@ const services = [
     title: 'Línea Automotriz',
     description: 'Polarizados y películas de alta tecnología para todo tipo de vehículos. Más frescura, privacidad y protección.',
     href: '/linea-automotriz',
-    image: '/images/polarizada_20.jpg',
     items: ['No Reflectivo', 'Cerámica', 'Seguridad', 'Alto Desempeño'],
   },
 ]
@@ -41,14 +39,18 @@ export default function ServicesPreview() {
                   to={service.href}
                   className="card card-hover group block h-full focus-visible:ring-2"
                 >
-                  <div className="relative h-52 overflow-hidden">
-                    <img
-                      src={service.image}
-                      alt=""
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  <div className="relative h-36 overflow-hidden bg-gradient-to-br from-ink-900 via-primary-900 to-primary-800">
+                    {/* Geometric motif standing in for photography — see note above */}
+                    <div
+                      className="absolute inset-0 opacity-[0.13] transition-transform duration-700 group-hover:scale-110"
+                      style={{
+                        backgroundImage:
+                          'linear-gradient(rgba(255,255,255,.9) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.9) 1px, transparent 1px)',
+                        backgroundSize: '38px 38px',
+                      }}
+                      aria-hidden="true"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-ink-950/25 to-transparent" />
+                    <div className="absolute -top-12 -right-8 w-44 h-44 rounded-full bg-accent-500/20 blur-2xl" aria-hidden="true" />
                     <div className="absolute bottom-4 left-5 flex items-center gap-3">
                       <div className="w-11 h-11 rounded-xl bg-white/15 backdrop-blur-md border border-white/25 text-white flex items-center justify-center">
                         <Icon size={20} />

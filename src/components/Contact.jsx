@@ -47,9 +47,9 @@ export default function Contact() {
           {/* Left: info */}
           <div>
             <img
-              src="/images/logo.png"
+              src="/images/logo-white.png"
               alt="BluSolare"
-              className="h-10 w-auto object-contain mb-5 brightness-0 invert opacity-80"
+              className="h-10 w-auto object-contain mb-5 opacity-80"
             loading="lazy"
           />
             <h2 className="text-3xl md:text-4xl font-black text-white leading-tight">

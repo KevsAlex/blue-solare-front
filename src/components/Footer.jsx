@@ -35,9 +35,9 @@ export default function Footer() {
           <div>
             <Link to="/" className="inline-block mb-4">
               <img
-                src="/images/logo.png"
+                src="/images/logo-white.png"
                 alt="BluSolare logo"
-                className="h-10 w-auto object-contain brightness-0 invert"
+                className="h-10 w-auto object-contain"
             loading="lazy"
           />
             </Link>

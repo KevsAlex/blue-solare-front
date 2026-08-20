@@ -49,7 +49,7 @@ export default function Navbar() {
         <div className={`flex items-center justify-between gap-4 transition-all duration-300 ${scrolled ? 'h-16' : 'h-[72px]'}`}>
           <Link to="/" className="flex-shrink-0" aria-label="BluSolare — inicio">
             <img
-              src="/images/logo.png"
+              src="/images/logo-dark.png"
               alt="BluSolare"
               className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-9' : 'h-11'}`}
             />
