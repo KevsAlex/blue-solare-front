@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { FiPlus, FiTrash2, FiSend, FiArrowRight, FiMaximize, FiCheck, FiAlertCircle } from 'react-icons/fi'
 import { ARQ_PRICES, AUTO_PRICE_M2, AUTO_INSTALL } from '../data/films'
 import BlockComparison from '../components/BlockComparison'
+import { track, EVENTS } from '../lib/analytics'
 
 // ── Film catalogue ────────────────────────────────────────────────────────────
 // Catalogue comes from the pricing workbook via films.js so names, prices and
@@ -261,7 +262,18 @@ export default function Cotiza() {
     }
     setErrors({})
     const msg = buildMessage(client, items)
-    window.open(`https://wa.me/524424488516?text=${msg}`, '_blank')
+    track(EVENTS.COTIZACION_ENVIADA, {
+      origen: 'cotizador_completo',
+      elementos: items.length,
+      area_m2: parseFloat(totalArea(items)) || 0,
+      valor_estimado: items.reduce((sum, it) => {
+        const f = filmData(it.pelicula)
+        const a = parseFloat(area(it))
+        return f && a ? sum + Math.round(a * f.price) : sum
+      }, 0),
+      moneda: 'MXN',
+    })
+    window.open(`https://wa.me/524424488516?text=${msg}`, '_blank', 'noopener')
     setSent(true)
   }
 

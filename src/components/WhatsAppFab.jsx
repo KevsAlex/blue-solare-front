@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { FaWhatsapp } from 'react-icons/fa'
 import { FiX, FiMessageSquare, FiTag, FiCalendar, FiShield } from 'react-icons/fi'
 import { waLink } from '../data/films'
+import { track, EVENTS } from '../lib/analytics'
 
 /**
  * WhatsApp is BluSolare's actual sales channel, so it gets a persistent entry
@@ -68,7 +69,7 @@ export default function WhatsAppFab() {
               href={waLink(msg)}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => setOpen(false)}
+              onClick={() => { track(EVENTS.WHATSAPP_CLICK, { origen: 'fab_menu', opcion: label }); setOpen(false) }}
               style={{ transitionDelay: open ? `${60 + i * 45}ms` : '0ms' }}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-ink-700
                           hover:bg-primary-50 hover:text-primary-700 transition-all duration-300 ${

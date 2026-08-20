@@ -5,6 +5,7 @@ import { FaWhatsapp } from 'react-icons/fa'
 import SectionHeading from './ui/SectionHeading'
 import Reveal from './ui/Reveal'
 import { ARQ_PRICES, UV_BLOCK, waLink } from '../data/films'
+import { track, EVENTS } from '../lib/analytics'
 
 /**
  * Slim quote builder that lives ON the home page.
@@ -153,6 +154,16 @@ export default function QuickQuote() {
 
               <div className="flex flex-wrap gap-3 mt-auto">
                 <a href={waLink(msg)} target="_blank" rel="noopener noreferrer"
+                   onClick={() =>
+                     track(EVENTS.COTIZACION_ENVIADA, {
+                       origen: 'home_quickquote',
+                       pelicula: level.name,
+                       vlt: level.vlt,
+                       area_m2: +area.toFixed(2),
+                       valor_estimado: total,
+                       moneda: 'MXN',
+                     })
+                   }
                    className="btn inline-flex bg-[#25D366] text-white hover:brightness-105 hover:-translate-y-0.5 px-6 py-3.5">
                   <FaWhatsapp size={18} /> Enviar por WhatsApp
                 </a>
