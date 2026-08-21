@@ -79,35 +79,43 @@
 
   /* Range input tuned for touch.
      The native thumb is ~16px on a ~4px track — under the 44px minimum tap
-     target, which is why the tint slider felt unusable on a phone. Bigger thumb,
-     taller track, and a padded hit area. `touch-action: pan-y` lets the browser
-     keep vertical scrolling while the horizontal gesture goes to the slider, so
-     dragging it never fights the page scroll. */
+     target. Bigger thumb, taller track, padded hit area.
+     The track shows a filled portion up to the thumb via --fill, set inline:
+     without it the control gives no feedback on where you are, which is half of
+     why it read as "stuck". No touch-action override — the browser resolves
+     drag-vs-scroll on a range input correctly on its own, and overriding it
+     interfered. */
   .range-touch {
     @apply w-full bg-transparent cursor-pointer;
     -webkit-appearance: none;
     appearance: none;
-    touch-action: pan-y;
-    padding: 14px 0;          /* hit area, not visual height */
+    padding: 14px 0;
   }
   .range-touch::-webkit-slider-runnable-track {
-    @apply h-2 rounded-full bg-ink-200;
+    @apply h-2.5 rounded-full;
+    background: linear-gradient(to right,
+      theme(colors.primary.600) var(--fill, 0%),
+      theme(colors.ink.200) var(--fill, 0%));
   }
   .range-touch::-moz-range-track {
-    @apply h-2 rounded-full bg-ink-200;
+    @apply h-2.5 rounded-full;
+    background: linear-gradient(to right,
+      theme(colors.primary.600) var(--fill, 0%),
+      theme(colors.ink.200) var(--fill, 0%));
   }
   .range-touch::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     @apply w-7 h-7 rounded-full bg-primary-600 border-4 border-white shadow-lift;
-    margin-top: -10px;        /* centre the 28px thumb on the 8px track */
-    transition: transform .15s ease;
+    margin-top: -9px;
+    transition: transform .12s ease;
   }
   .range-touch::-moz-range-thumb {
-    @apply w-7 h-7 rounded-full bg-primary-600 border-4 border-white shadow-lift;
+    @apply w-7 h-7 rounded-full bg-primary-600 shadow-lift;
     border: 4px solid #fff;
   }
-  .range-touch:active::-webkit-slider-thumb { transform: scale(1.15); }
+  .range-touch:active::-webkit-slider-thumb { transform: scale(1.2); }
+  .range-touch:active::-moz-range-thumb { transform: scale(1.2); }
 
   /* Cards lift and their shadow deepens together. */
   .card-hover { @apply hover:shadow-lift hover:-translate-y-1.5 hover:border-primary-200; }

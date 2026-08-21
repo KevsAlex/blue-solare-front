@@ -25,12 +25,29 @@ const LEVELS = [5, 20, 35, 50].map((vlt) => ({
 }))
 
 export default function QuickQuote() {
-  const [idx, setIdx] = useState(1)
+  // `pos` is CONTINUOUS (0..3, hundredths). The slider used to have step=1 over
+  // four values, so ~117px of drag produced no change at all and it felt stuck.
+  // Now the tint darkens on every pixel of movement, while the selected PRODUCT
+  // snaps to the nearest real catalogue item — smooth to use, still quoting
+  // something we actually sell.
+  const [pos, setPos] = useState(1)
+  const idx = Math.round(pos)
   const [ancho, setAncho] = useState('1.5')
   const [alto, setAlto] = useState('1.2')
   const [qty, setQty] = useState(2)
 
   const level = LEVELS[idx]
+
+  // Interpolate the overlay between the two neighbouring levels so the preview
+  // responds continuously rather than jumping in four steps.
+  const previewOpacity = (() => {
+    const lo = Math.floor(pos)
+    const hi = Math.min(LEVELS.length - 1, Math.ceil(pos))
+    const t = pos - lo
+    return LEVELS[lo].opacity + (LEVELS[hi].opacity - LEVELS[lo].opacity) * t
+  })()
+
+  const fillPct = (pos / (LEVELS.length - 1)) * 100
 
   const { area, total } = useMemo(() => {
     const w = parseFloat(ancho), h = parseFloat(alto)
@@ -65,8 +82,8 @@ export default function QuickQuote() {
                 loading="lazy"
               />
               <div
-                className="absolute inset-0 bg-ink-950 transition-opacity duration-700 ease-out"
-                style={{ opacity: level.opacity }}
+                className="absolute inset-0 bg-ink-950"
+                style={{ opacity: previewOpacity, transition: 'opacity 90ms linear' }}
                 aria-hidden="true"
               />
               <div className="absolute top-4 left-4 bg-white/95 backdrop-blur rounded-xl px-3.5 py-2 shadow-soft">
@@ -96,10 +113,21 @@ export default function QuickQuote() {
                 Nivel de polarizado
               </label>
               <input
-                id="qq-tint" type="range" min="0" max={LEVELS.length - 1} step="1" value={idx}
-                onChange={(e) => setIdx(Number(e.target.value))}
+                id="qq-tint"
+                type="range"
+                min="0"
+                max={LEVELS.length - 1}
+                step="0.01"
+                value={pos}
+                onChange={(e) => setPos(Number(e.target.value))}
+                // Settle on a real product when the drag ends, so the slider
+                // never rests between two films.
+                onPointerUp={() => setPos(idx)}
+                onKeyUp={() => setPos(idx)}
+                onBlur={() => setPos(idx)}
                 aria-valuetext={level.name}
-                className="range-touch accent-primary-600"
+                style={{ '--fill': `${fillPct}%` }}
+                className="range-touch"
               />
 
               {/* Segmented control, not just labels. With only four values,
@@ -110,7 +138,7 @@ export default function QuickQuote() {
                   <button
                     key={l.vlt}
                     type="button"
-                    onClick={() => setIdx(i)}
+                    onClick={() => setPos(i)}
                     aria-pressed={i === idx}
                     className={`min-h-[48px] rounded-xl text-base font-bold transition-all duration-200 border ${
                       i === idx
