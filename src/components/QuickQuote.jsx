@@ -99,16 +99,27 @@ export default function QuickQuote() {
                 id="qq-tint" type="range" min="0" max={LEVELS.length - 1} step="1" value={idx}
                 onChange={(e) => setIdx(Number(e.target.value))}
                 aria-valuetext={level.name}
-                className="w-full accent-primary-600 cursor-pointer"
+                className="range-touch accent-primary-600"
               />
-              <div className="flex justify-between mt-2 mb-6">
+
+              {/* Segmented control, not just labels. With only four values,
+                  tapping is more reliable than dragging on a phone — this is the
+                  primary control on touch and the slider is the flourish. */}
+              <div className="grid grid-cols-4 gap-2 mt-2 mb-6" role="group" aria-label="Nivel de polarizado">
                 {LEVELS.map((l, i) => (
                   <button
-                    key={l.vlt} onClick={() => setIdx(i)}
-                    className={`text-xs font-semibold px-2.5 py-1 rounded-md transition-all duration-200 ${
-                      i === idx ? 'text-primary-700 bg-primary-50 scale-105' : 'text-ink-400 hover:text-ink-700'
+                    key={l.vlt}
+                    type="button"
+                    onClick={() => setIdx(i)}
+                    aria-pressed={i === idx}
+                    className={`min-h-[48px] rounded-xl text-base font-bold transition-all duration-200 border ${
+                      i === idx
+                        ? 'bg-primary-600 text-white border-primary-600 shadow-glow scale-[1.03]'
+                        : 'bg-white text-ink-500 border-ink-200 hover:border-primary-300 hover:text-primary-700 active:scale-95'
                     }`}
-                  >{l.vlt}%</button>
+                  >
+                    {l.vlt}%
+                  </button>
                 ))}
               </div>
 
@@ -123,7 +134,8 @@ export default function QuickQuote() {
                     <input
                       id={f.id} type="number" min="0" step={f.step} value={f.v}
                       onChange={(e) => f.set(e.target.value)}
-                      className="w-full border border-ink-200 rounded-xl px-3 py-2.5 text-sm tabular-nums
+                      inputMode="decimal"
+                      className="w-full border border-ink-200 rounded-xl px-3 py-3 text-base tabular-nums
                                  focus:outline-none focus:ring-2 focus:ring-primary-300"
                     />
                   </div>
