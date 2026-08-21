@@ -28,7 +28,14 @@ export default function Reveal({ children, delay = 0, className = '' }) {
       { threshold: 0.12, rootMargin: '0px 0px -60px 0px' },
     )
     io.observe(el)
-    return () => io.disconnect()
+
+    // Failsafe: reveal regardless after a short delay. If the observer never
+    // fires — an odd scroll container, an iframe, a browser quirk — the content
+    // would otherwise stay at opacity 0 FOREVER. A missed animation is a cosmetic
+    // problem; an invisible section is a broken page.
+    const failsafe = setTimeout(() => setShown(true), 1600)
+
+    return () => { io.disconnect(); clearTimeout(failsafe) }
   }, [])
 
   return (

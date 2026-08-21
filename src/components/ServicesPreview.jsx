@@ -9,6 +9,7 @@ const services = [
     title: 'Línea Arquitectónica',
     description: 'Películas para ventanas de hogares, oficinas y negocios. Control solar, privacidad, seguridad y diseño decorativo.',
     href: '/linea-arquitectonica',
+    photo: '/images/real-sala.jpg',
     items: ['Control Solar', 'Reflectivas', 'Polarizadas', 'Nanocerámica', 'Esmeriladas', 'Seguridad'],
   },
   {
@@ -40,6 +41,15 @@ export default function ServicesPreview() {
                   className="card card-hover group block h-full focus-visible:ring-2"
                 >
                   <div className="relative h-36 overflow-hidden bg-gradient-to-br from-ink-900 via-primary-900 to-primary-800">
+                    {service.photo && (
+                      <img
+                        src={service.photo}
+                        alt=""
+                        loading="lazy"
+                        className="absolute inset-0 w-full h-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-105"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink-950/85 via-ink-950/40 to-transparent" />
                     {/* Geometric motif standing in for photography — see note above */}
                     <div
                       className="absolute inset-0 opacity-[0.13] transition-transform duration-700 group-hover:scale-110"

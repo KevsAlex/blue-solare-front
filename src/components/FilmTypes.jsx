@@ -9,7 +9,7 @@ const films = [
     Icon: FiThermometer,
     title: 'Reducción de Calor',
     tagline: 'Hasta 95% de rechazo infrarrojo',
-    image: '/images/bajar_calor.jpg',
+    image: '/images/real-espejo.jpg',
     imageAlt: 'Sala con ventanas y película de control solar BluSolare',
     description:
       'Nuestras películas de control solar son la solución más eficiente para combatir el calor. Disponibles en versiones reflectivas y cerámicas para cada necesidad.',

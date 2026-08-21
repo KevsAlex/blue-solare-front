@@ -76,8 +76,8 @@ export default function QuickQuote() {
             {/* Preview */}
             <div className="relative rounded-3xl overflow-hidden shadow-lift border border-ink-100 min-h-[330px] group">
               <img
-                src="/images/window-clean.jpg"
-                alt={`Simulación de una ventana con ${level.name}`}
+                src="/images/real-ventanal.jpg"
+                alt={`Ventanal tratado — simulación de ${level.name}`}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] group-hover:scale-105"
                 loading="lazy"
               />
@@ -140,13 +140,19 @@ export default function QuickQuote() {
                     type="button"
                     onClick={() => setPos(i)}
                     aria-pressed={i === idx}
-                    className={`min-h-[48px] rounded-xl text-base font-bold transition-all duration-200 border ${
+                    title={`${l.name} — ${l.note}`}
+                    className={`group relative flex flex-col items-center justify-center gap-0.5 min-h-[56px]
+                                rounded-xl border-2 cursor-pointer select-none
+                                transition-all duration-200 active:scale-95 ${
                       i === idx
-                        ? 'bg-primary-600 text-white border-primary-600 shadow-glow scale-[1.03]'
-                        : 'bg-white text-ink-500 border-ink-200 hover:border-primary-300 hover:text-primary-700 active:scale-95'
+                        ? 'bg-primary-600 text-white border-primary-600 shadow-glow -translate-y-0.5'
+                        : 'bg-white text-ink-700 border-ink-200 shadow-soft hover:border-primary-500 hover:text-primary-700 hover:-translate-y-0.5 hover:shadow-lift'
                     }`}
                   >
-                    {l.vlt}%
+                    <span className="text-base font-extrabold leading-none tabular-nums">{l.vlt}%</span>
+                    <span className={`text-[10px] font-medium leading-none ${i === idx ? 'text-white/70' : 'text-ink-400'}`}>
+                      ${l.price}/m²
+                    </span>
                   </button>
                 ))}
               </div>
