@@ -29,6 +29,7 @@ export default {
         'fade-up': { '0%': { opacity: '0', transform: 'translateY(16px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
         float:     { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
         shimmer:   { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+        grow:      { '0%': { transform: 'scaleX(0)' }, '100%': { transform: 'scaleX(1)' } },
       },
       animation: {
         'fade-up': 'fade-up .6s cubic-bezier(.16,1,.3,1) both',

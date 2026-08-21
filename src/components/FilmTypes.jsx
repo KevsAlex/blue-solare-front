@@ -1,144 +1,129 @@
-import { useState } from 'react'
-import { FiChevronDown, FiChevronUp, FiThermometer, FiShield, FiFeather } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
+import { FiSun, FiShield, FiFeather, FiArrowRight } from 'react-icons/fi'
 import SectionHeading from './ui/SectionHeading'
 import Reveal from './ui/Reveal'
+import { ARQ_PRICES, UV_BLOCK, MAX_IR, WARRANTY_YEARS } from '../data/films'
 
-const films = [
+/**
+ * Rewritten from three paragraph cards with 4-row spec tables — nobody scans
+ * that on a landing page.
+ *
+ * Now each card leads with the PROBLEM in the customer's words, then one number
+ * big enough to read at a glance, then a single line, then the real starting
+ * price. Every figure is sourced from films.js; where a category has no
+ * comparable measured number, the price leads instead of inventing one.
+ */
+const from = (name) => ARQ_PRICES.find((p) => p.name === name).price
+
+const GROUPS = [
   {
     id: 'calor',
-    Icon: FiThermometer,
-    title: 'Reducción de Calor',
-    tagline: 'Hasta 95% de rechazo infrarrojo',
-    image: '/images/real-espejo.jpg',
-    imageAlt: 'Sala con ventanas y película de control solar BluSolare',
-    description:
-      'Nuestras películas de control solar son la solución más eficiente para combatir el calor. Disponibles en versiones reflectivas y cerámicas para cada necesidad.',
-    specs: [
-      { label: 'Bloqueo de rayos UV', value: '100%' },
-      { label: 'Rechazo infrarrojo', value: 'Hasta 95%' },
-      { label: 'Tonos disponibles', value: 'Humo, verde, azul' },
-      { label: 'Garantía', value: '8–10 años' },
-    ],
-    color: 'orange',
+    Icon: FiSun,
+    problem: 'Hace demasiado calor',
+    hero: `${MAX_IR}%`,
+    heroLabel: 'rechazo infrarrojo',
+    line: 'Películas reflectivas y cerámicas que bajan el calor sin dejarte a oscuras.',
+    chips: [`${UV_BLOCK}% rayos UV`, 'Humo, verde o azul'],
+    price: from('Película Espejo Plata'),
+    href: '/linea-arquitectonica',
+    tone: {
+      ring: 'hover:border-orange-300', chip: 'bg-orange-50 text-orange-700 border-orange-100',
+      icon: 'bg-orange-50 text-orange-600 border-orange-100', hero: 'text-orange-600',
+    },
   },
   {
     id: 'seguridad',
     Icon: FiShield,
-    title: 'Seguridad',
-    tagline: 'Protección ante impactos',
-    description:
-      'Las películas de seguridad refuerzan el vidrio manteniéndolo unido ante impactos. Disponibles transparentes o con ligera tonalidad, son ideales para vitrinas, ventanas de alto tráfico o vehículos.',
-    specs: [
-      { label: 'Espesor', value: '4–7 mil' },
-      { label: 'Garantía', value: '8–10 años' },
-      { label: 'Función', value: 'Retención de fragmentos' },
-      { label: 'Aspecto', value: 'Transparente o tintado ligero' },
-    ],
-    color: 'blue',
+    problem: 'Me preocupa la seguridad',
+    hero: '4–7',
+    heroLabel: 'mil de espesor',
+    line: 'Refuerzan el cristal y lo mantienen unido ante un impacto. Transparentes o con tono ligero.',
+    chips: ['Retiene fragmentos', 'Vitrinas y accesos'],
+    price: from('Seguridad 4 Mic'),
+    href: '/linea-arquitectonica',
+    tone: {
+      ring: 'hover:border-primary-300', chip: 'bg-primary-50 text-primary-700 border-primary-100',
+      icon: 'bg-primary-50 text-primary-700 border-primary-100', hero: 'text-primary-700',
+    },
   },
   {
-    id: 'decorativas',
+    id: 'privacidad',
     Icon: FiFeather,
-    title: 'Decorativas',
-    tagline: 'Estética y privacidad sin oscurecer',
-    description:
-      'Transforma cualquier espacio con nuestras películas decorativas. Desde esmerilados clásicos hasta efectos dicróicos multicolor, la creatividad no tiene límites.',
-    specs: [
-      { label: 'Esmerilado', value: 'Privacidad sin perder luz' },
-      { label: 'Dicróico tricolor', value: 'Efecto multicolor dinámico' },
-      { label: 'Microperforado', value: 'Diseños personalizables' },
-      { label: 'Garantía', value: '8–10 años' },
-    ],
-    color: 'purple',
+    problem: 'Quiero privacidad y diseño',
+    hero: 'Sin',
+    heroLabel: 'oscurecer el espacio',
+    line: 'Esmerilados, dicroicos multicolor y microperforado para lograr privacidad conservando la luz.',
+    chips: ['Esmerilado', 'Dicroico tricolor'],
+    price: from('Esmerilado Premium'),
+    href: '/linea-arquitectonica',
+    tone: {
+      ring: 'hover:border-purple-300', chip: 'bg-purple-50 text-purple-700 border-purple-100',
+      icon: 'bg-purple-50 text-purple-600 border-purple-100', hero: 'text-purple-600',
+    },
   },
 ]
 
-const colorMap = {
-  orange: { bg: 'bg-orange-50', border: 'border-orange-200', tag: 'bg-orange-100 text-orange-700', val: 'text-orange-600', icon: 'bg-orange-100' },
-  blue:   { bg: 'bg-blue-50',   border: 'border-blue-200',   tag: 'bg-blue-100 text-blue-700',     val: 'text-blue-600',   icon: 'bg-blue-100' },
-  purple: { bg: 'bg-purple-50', border: 'border-purple-200', tag: 'bg-purple-100 text-purple-700', val: 'text-purple-600', icon: 'bg-purple-100' },
-}
-
 export default function FilmTypes() {
-  const [openId, setOpenId] = useState(null)
-
   return (
-    <section id="peliculas" className="py-14 lg:py-14 bg-white">
+    <section id="peliculas" className="py-14 lg:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Tipos de película"
-          title="¿Qué es una película de ventana?"
-          subtitle="Una lámina delgada y funcional que se adhiere al vidrio para mejorar sus propiedades. Estos son los tres tipos principales que ofrecemos."
+          title="¿Qué quieres resolver?"
+          subtitle="Elige por el problema, no por el producto. Nosotros te decimos qué película lo soluciona."
         />
 
-        {/* Desktop: grid cards */}
-        <div className="hidden md:grid md:grid-cols-3 gap-6">
-          {films.map((film) => {
-            const c = colorMap[film.color]
-            return (
-              <Reveal key={film.id} delay={films.indexOf(film) * 90} className="h-full">
-               <div className={`card card-hover ${c.bg} border ${c.border} p-8 h-full`}>
-                <div className={`w-14 h-14 ${c.icon} rounded-2xl flex items-center justify-center mb-5`}>
-                  <film.Icon size={24} className={c.val} />
-                </div>
-                <span className={`text-xs font-bold uppercase tracking-wider px-2 py-1 rounded-md ${c.tag}`}>
-                  {film.tagline}
+        <div className="grid gap-6 md:grid-cols-3">
+          {GROUPS.map((g, i) => (
+            <Reveal key={g.id} delay={i * 120} className="h-full">
+              <Link
+                to={g.href}
+                className={`group card card-hover ${g.tone.ring} h-full flex flex-col p-7 border-2`}
+              >
+                <span className={`w-[52px] h-[52px] rounded-2xl border flex items-center justify-center mb-5
+                                  transition-transform duration-300 group-hover:-translate-y-1 ${g.tone.icon}`}>
+                  <g.Icon size={24} />
                 </span>
-                <h3 className="text-xl font-bold text-ink-900 mt-3 mb-3">{film.title}</h3>
-                <p className="text-ink-600 text-sm leading-relaxed mb-6">{film.description}</p>
-                <div className="space-y-3">
-                  {film.specs.map((spec) => (
-                    <div key={spec.label} className="flex justify-between items-center text-sm">
-                      <span className="text-ink-500">{spec.label}</span>
-                      <span className={`font-semibold ${c.val}`}>{spec.value}</span>
-                    </div>
+
+                <p className="text-sm font-semibold text-ink-400">{g.problem}</p>
+
+                {/* The number is the hook — big enough to read while scrolling past. */}
+                <p className="mt-2 flex items-baseline gap-2">
+                  <span className={`text-4xl lg:text-5xl font-black leading-none tabular-nums ${g.tone.hero}`}>
+                    {g.hero}
+                  </span>
+                  <span className="text-sm text-ink-500 leading-tight">{g.heroLabel}</span>
+                </p>
+
+                <p className="text-ink-500 text-sm leading-relaxed mt-4">{g.line}</p>
+
+                <div className="flex flex-wrap gap-2 mt-5">
+                  {g.chips.map((c) => (
+                    <span key={c} className={`text-[11px] font-semibold px-2.5 py-1 rounded-full border ${g.tone.chip}`}>
+                      {c}
+                    </span>
                   ))}
                 </div>
-               </div>
-              </Reveal>
-            )
-          })}
+
+                {/* Price is the thing that converts a browser into an enquiry. */}
+                <div className="mt-auto pt-6 flex items-end justify-between gap-3">
+                  <span className="text-sm text-ink-500">
+                    desde <strong className="text-ink-900 text-lg tabular-nums">${g.price}</strong>
+                    <span className="text-ink-400"> /m² instalado</span>
+                  </span>
+                  <FiArrowRight
+                    size={18}
+                    className="text-ink-300 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-primary-700"
+                  />
+                </div>
+              </Link>
+            </Reveal>
+          ))}
         </div>
 
-        {/* Mobile: accordion */}
-        <div className="md:hidden space-y-3">
-          {films.map((film) => {
-            const c = colorMap[film.color]
-            const isOpen = openId === film.id
-            return (
-              <div key={film.id} className={`card border ${c.border} ${c.bg}`}>
-                <button
-                  onClick={() => setOpenId(isOpen ? null : film.id)}
-                  className="w-full flex items-center justify-between p-5 text-left"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className={`w-10 h-10 rounded-xl ${c.icon} flex items-center justify-center`}>
-                      <film.Icon size={19} className={c.val} />
-                    </span>
-                    <div>
-                      <p className="font-bold text-ink-900">{film.title}</p>
-                      <p className={`text-xs font-medium ${c.val}`}>{film.tagline}</p>
-                    </div>
-                  </div>
-                  {isOpen ? <FiChevronUp className="text-ink-500" /> : <FiChevronDown className="text-ink-500" />}
-                </button>
-                {isOpen && (
-                  <div className="px-5 pb-5 border-t border-ink-100">
-                    <p className="text-ink-600 text-sm leading-relaxed my-4">{film.description}</p>
-                    <div className="space-y-2">
-                      {film.specs.map((spec) => (
-                        <div key={spec.label} className="flex justify-between text-sm">
-                          <span className="text-ink-500">{spec.label}</span>
-                          <span className={`font-semibold ${c.val}`}>{spec.value}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            )
-          })}
-        </div>
+        <p className="text-center text-xs text-ink-400 mt-8">
+          Precios sin IVA · Garantía de {WARRANTY_YEARS} años · Instalación incluida
+        </p>
       </div>
     </section>
   )
